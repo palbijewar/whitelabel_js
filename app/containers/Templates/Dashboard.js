@@ -80,8 +80,6 @@ function Dashboard(props) {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(loginUser(user));
-      } else {
-        dispatch(loginUser(null));
       }
     }, [auth, dispatch]);
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate, NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -18,24 +19,28 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Cookies from 'js-cookie';
+
 import brand from 'enl-api/dummy/brand';
 import MessagesForm from './MessagesForm';
 import messages from './messages';
 import useStyles from './user-jss';
-import { loginService } from '../../middlewares/interceptors';
+import { getUserDetails, loginService } from '../../middlewares/interceptors';
+
+import { loginUser } from '../../redux/modules/auth';
 
 const validationSchema = yup.object({
-  username: yup.string().required('Username is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
   password: yup.string().required('Password is required'),
 });
 
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <NavLink to={props.to} {...props} />; // eslint-disable-line
+const LinkBtn = React.forwardRef(function LinkBtn(props, ref) {
+  return <NavLink to={props.to} {...props} />;
 });
 
 function LoginForm(props) {
   const { classes, cx } = useStyles();
-  const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
+  const dispatch = useDispatch();
+  const mdUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
   const navigate = useNavigate();
   const { link, intl, messagesAuth, closeMsg } = props;
 
@@ -44,47 +49,58 @@ function LoginForm(props) {
   const [serverMessage, setServerMessage] = useState(null);
 
   const handleClickShowPassword = () => {
-    setShowPassword(show => !show);
+    setShowPassword((show) => !show);
   };
 
-  const handleMouseDownPassword = event => {
+  const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
 
   const formik = useFormik({
     initialValues: {
-      username: '',
+      email: '',
       password: '',
     },
     validationSchema,
     onSubmit: async (values) => {
       setLoading(true);
       setServerMessage(null);
-
       try {
-        const data = await loginService({
-          username: values.username,
-          password: values.password
+        const response = await loginService({
+          username: values.email,
+          password: values.password,
         });
-
-        setServerMessage({ type: 'success', text: 'Login successful!' });
-
-        Cookies.set('access_token', data.token, { expires: 1 });
-        setTimeout(() => navigate('/app'), 2000);
+        console.log('API Response:', response);
+        const accessToken = response?.data?.data?.access_token || response?.data?.access_token;
+        if (!accessToken) {
+          throw new Error('Token missing in response');
+        }
+        Cookies.set('access_token', accessToken, { expires: 7 });
+        const user = await getUserDetails();
+        dispatch(
+          loginUser(user.data)
+        );
+        navigate('/app');
       } catch (error) {
-        const errorMessage = error.response?.data?.message || 'Invalid credentials';
-        setServerMessage({ type: 'error', text: errorMessage });
+        console.error('Login error:', error);
+        setServerMessage({
+          type: 'error',
+          text: error.response?.data?.message || 'Invalid credentials',
+        });
       } finally {
         setLoading(false);
       }
-    },
+    }
+
   });
 
   return (
     <Paper className={classes.sideWrap}>
       {!mdUp && (
         <div className={classes.headLogo}>
-          <NavLink to="/" className={classes.brand}>{brand.name}</NavLink>
+          <NavLink to="/" className={classes.brand}>
+            {brand.name}
+          </NavLink>
         </div>
       )}
       <div className={classes.topBar}>
@@ -111,14 +127,14 @@ function LoginForm(props) {
           <div>
             <FormControl variant="standard" className={classes.formControl}>
               <TextField
-                id="username"
-                name="username"
-                label="Username"
+                id="email"
+                name="email"
+                label="Email"
                 variant="standard"
-                value={formik.values.username}
+                value={formik.values.email}
                 onChange={formik.handleChange}
-                error={formik.touched.username && Boolean(formik.errors.username)}
-                helperText={formik.touched.username && formik.errors.username}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
                 className={classes.field}
               />
             </FormControl>
@@ -143,11 +159,12 @@ function LoginForm(props) {
                         aria-label="Toggle password visibility"
                         onClick={handleClickShowPassword}
                         onMouseDown={handleMouseDownPassword}
-                        size="large">
+                        size="large"
+                      >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
                 }}
               />
             </FormControl>
@@ -182,7 +199,7 @@ LoginForm.defaultProps = {
   messagesAuth: null,
   loading: false,
   closeMsg: () => {},
-  link: '#'
+  link: '#',
 };
 
 export default injectIntl(LoginForm);

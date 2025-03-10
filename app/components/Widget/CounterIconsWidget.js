@@ -9,10 +9,12 @@ import { injectIntl } from 'react-intl';
 import CounterWidget from '../Counter/CounterWidget';
 import messages from './messages';
 import useStyles from './widget-jss';
+import { useSelector } from 'react-redux';
 
 function CounterIconWidget(props) {
   const { intl } = props;
   const { classes } = useStyles();
+  const userDetails = useSelector((state) => state.auth.user);
 
   return (
     <div className={classes.rootCounterFull}>
@@ -23,7 +25,7 @@ function CounterIconWidget(props) {
             start={0}
             end={207}
             duration={3}
-            title={intl.formatMessage(messages.subscribers)}
+            title={userDetails?.name}
           >
             <OndemandVideo className={classes.counterIcon} />
           </CounterWidget>
@@ -34,7 +36,7 @@ function CounterIconWidget(props) {
             start={0}
             end={300}
             duration={3}
-            title={intl.formatMessage(messages.followers)}
+            title="Angel One"
           >
             <SupervisorAccount className={classes.counterIcon} />
           </CounterWidget>
@@ -45,7 +47,7 @@ function CounterIconWidget(props) {
             start={0}
             end={67}
             duration={3}
-            title={intl.formatMessage(messages.total_posts)}
+            title="Crypto"
           >
             <Edit className={classes.counterIcon} />
           </CounterWidget>
@@ -56,7 +58,7 @@ function CounterIconWidget(props) {
             start={0}
             end={70}
             duration={3}
-            title={intl.formatMessage(messages.total_articles)}
+            title="Total Traders"
           >
             <CollectionsBookmark className={classes.counterIcon} />
           </CounterWidget>

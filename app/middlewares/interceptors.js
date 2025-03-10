@@ -72,3 +72,13 @@ export const signUpUser = async (formData) => {
     throw error;
   }
 };
+
+export const getUserDetails = async () => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const response = await interceptorInstance.get('/users/me');
+    return response?.data;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Navigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -9,11 +9,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
 import Icon from '@mui/material/Icon';
 import CircularProgress from '@mui/material/CircularProgress';
 import { injectIntl, FormattedMessage } from 'react-intl';
@@ -38,7 +36,7 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 function LoginForm(props) {
   const { classes, cx } = useStyles();
   const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
-
+  const navigate = useNavigate();
   const { link, intl, messagesAuth, closeMsg } = props;
 
   const [showPassword, setShowPassword] = useState(false);
@@ -72,7 +70,7 @@ function LoginForm(props) {
         setServerMessage({ type: 'success', text: 'Login successful!' });
 
         Cookies.set('access_token', data.token, { expires: 1 });
-        setTimeout(() => Navigate('/dashboard'), 2000);
+        setTimeout(() => navigate('/app'), 2000);
       } catch (error) {
         const errorMessage = error.response?.data?.message || 'Invalid credentials';
         setServerMessage({ type: 'error', text: errorMessage });

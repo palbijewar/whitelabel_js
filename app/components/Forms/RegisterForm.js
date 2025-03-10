@@ -65,7 +65,7 @@ function RegisterForm(props) {
           name: values.name,
           email: values.email,
           mobile: values.mobile,
-          user_type: 'regular', 
+          user_type: 'regular',
           password: values.password,
         });
 
@@ -79,7 +79,7 @@ function RegisterForm(props) {
 
           setServerMessage({ type: 'success', text: 'Registration successful! Redirecting...' });
 
-          setTimeout(() => navigate('/dashboard'), 2000);
+          setTimeout(() => navigate('/app'), 2000);
         } else {
           throw new Error(signupResponse?.message || 'Signup failed. Please try again.');
         }
@@ -114,7 +114,6 @@ function RegisterForm(props) {
         </Button>
       </div>
 
-      {/* ✅ Show API response messages */}
       {serverMessage && (
         <MessagesForm
           variant={serverMessage.type}

@@ -310,7 +310,7 @@ export default defineMessages({
   },
   static_apps: {
     id: `${scope}.apps.static_apps`,
-    defaultMessage: 'Static Apps',
+    defaultMessage: 'Group 1',
   },
   contact: {
     id: `${scope}.apps.contact`,
@@ -322,7 +322,7 @@ export default defineMessages({
   },
   firebase_apps: {
     id: `${scope}.apps.firebase_apps`,
-    defaultMessage: 'Firebase Apps',
+    defaultMessage: 'Group 2',
   },
   contact_fullstack: {
     id: `${scope}.apps.contact_fullstack`,

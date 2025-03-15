@@ -26,7 +26,7 @@ export default defineMessages({
   },
   performance_indicator: {
     id: `${scope}.PerformanceChartWidget.title`,
-    defaultMessage: 'Performance Indicator',
+    defaultMessage: 'Trading View Chart',
   },
   achievement_target: {
     id: `${scope}.PerformanceChartWidget.target`,

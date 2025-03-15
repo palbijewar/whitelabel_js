@@ -23,7 +23,7 @@ import {
 function Todo(props) {
   const { intl } = props;
   const { classes } = useStyles();
-  const title = brand.name + ' - Todo App';
+  const title = brand.name + ' - Signals App';
   const description = brand.desc;
 
   // Redux State

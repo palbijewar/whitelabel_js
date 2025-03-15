@@ -93,7 +93,7 @@ module.exports = [
       {
         key: 'banknifty',
         name: 'BankNifty',
-        link: '/',
+        link: '/app/dashboard/crypto',
         icon: 'business',
         badge: 'Hot'
       },

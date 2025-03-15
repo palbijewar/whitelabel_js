@@ -11,7 +11,7 @@ const db = getDatabase();
 export const todoApi = createApi({
   reducerPath: 'todoApi',
   baseQuery: fakeBaseQuery(),
-  tagTypes: ['Todo'],
+  tagTypes: ['Signals'],
   endpoints: (builder) => ({
     fetchTodos: builder.query({
       queryFn: async () => {

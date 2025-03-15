@@ -94,7 +94,7 @@ export default defineMessages({
   },
   todoTitle: {
     id: `${scope}.Todo.title`,
-    defaultMessage: 'To Do List',
+    defaultMessage: 'Signals',
   },
   todoDesc: {
     id: `${scope}.Todo.desc`,

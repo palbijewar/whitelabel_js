@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button 
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button
 } from '@mui/material';
 
 const algoSignals = [

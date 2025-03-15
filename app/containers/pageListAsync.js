@@ -239,7 +239,7 @@ export const AuthenticatedPage = loadable(() => import('./Pages/AuthenticatedPag
 });
 
 // Sample Pre Build Apps
-export const Todo = loadable(() => import('./SampleApps/Todo'), {
+export const Todo = loadable(() => import('./Tables/SignalsTable'), {
   fallback: <Loading />,
 });
 export const TodoFirebase = loadable(() => import('./SampleFirebaseApps/Todo'), {

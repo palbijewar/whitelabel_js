@@ -334,7 +334,7 @@ export default defineMessages({
   },
   todo_fullstack: {
     id: `${scope}.apps.todo_fullstack`,
-    defaultMessage: 'Todo',
+    defaultMessage: 'Signals',
   },
   maps: {
     id: `${scope}.apps.maps`,

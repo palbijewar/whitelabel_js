@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'boilerplate.components.Todo';
+export const scope = 'boilerplate.components.Signals';
 
 export default defineMessages({
   title: {

@@ -1,47 +1,51 @@
 import React from 'react';
-import brand from 'enl-api/dummy/brand';
-import { Helmet } from 'react-helmet';
-import Grid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
-import {
-  CounterCryptoWidget,
-  CryptoChartWidget,
-  MarketPlaceWidget,
-  TradingFormWidget,
-  TransferCryptoWidget,
-} from 'enl-components';
-import useStyles from './dashboard-jss';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button } from '@mui/material';
 
-function CryptoDahboard() {
-  const title = brand.name + ' - Cryptocurrency Dashboard';
-  const description = brand.desc;
-  const { classes } = useStyles();
+const subscriptions = [
+  { id: 1, algo: 'BULLBEAR NIFTY INTRADAY', quantity: 10, tradeLimit: 50, status: 'Active' },
+  { id: 2, algo: 'BULL BEAR BANKNIFTY INTRADAY', quantity: 5, tradeLimit: 30, status: 'Inactive' },
+  { id: 3, algo: 'BULL BEAR BANKNIFTY INTRADAY', quantity: 7, tradeLimit: 40, status: 'Active' },
+  { id: 4, algo: 'BULLBEAR NIFTY INTRADAY', quantity: 8, tradeLimit: 45, status: 'Inactive' },
+  { id: 5, algo: 'BULL BEAR BANKNIFTY INTRADAY', quantity: 6, tradeLimit: 35, status: 'Active' }
+];
+
+function SubscriptionTable() {
   return (
-    <div>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-      </Helmet>
-      <CounterCryptoWidget />
-      <Divider className={classes.divider} />
-      <MarketPlaceWidget />
-      <Divider className={classes.divider} />
-      <CryptoChartWidget />
-      <Divider className={classes.divider} />
-      <Grid container spacing={3} className={classes.root}>
-        <Grid item md={6} xs={12}>
-          <TradingFormWidget />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <TransferCryptoWidget />
-        </Grid>
-      </Grid>
-    </div>
+    <Paper sx={{ padding: 2, margin: 2, overflowX: 'auto' }}>
+      <Typography variant="h6" align="center" gutterBottom>
+        Subscription Table
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>S.no</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Algo</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Quantity</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Trade Limit</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Status</TableCell>
+              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {subscriptions.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.id}</TableCell>
+                <TableCell>{row.algo}</TableCell>
+                <TableCell>{row.quantity}</TableCell>
+                <TableCell>{row.tradeLimit}</TableCell>
+                <TableCell>{row.status}</TableCell>
+                <TableCell>
+                  <Button variant="contained" color="primary" size="small" sx={{ marginRight: 1 }}>Edit</Button>
+                  <Button variant="contained" color="secondary" size="small">Unsubscribe</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 }
 
-export default CryptoDahboard;
+export default SubscriptionTable;

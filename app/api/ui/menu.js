@@ -76,7 +76,7 @@ module.exports = [
         key: 'todo',
         name: 'Option 1',
         icon: 'check_circle',
-        link: '/app/pages/todo',
+        link: '/app/containers/Tables/SignalsTable',
       },
     ]
   },
@@ -86,51 +86,11 @@ module.exports = [
     icon: 'Subscription',
     child: [
       {
-        key: 'indian-market',
-        name: 'Indian Market',
-        title: true,
-      },
-      {
         key: 'banknifty',
         name: 'BankNifty',
         link: '/app/dashboard/crypto',
         icon: 'business',
         badge: 'Hot'
-      },
-      {
-        key: 'nifty',
-        name: 'Nifty',
-        link: '/',
-        icon: 'business',
-        badge: 'Hot'
-      },
-      {
-        key: 'crypto',
-        name: 'Crypto',
-        title: true,
-      },
-      {
-        key: 'crypto',
-        name: 'Cryptocurrency',
-        icon: 'local_atm',
-        link: '/app/dashboard/crypto'
-      },
-      {
-        key: 'forex',
-        name: 'Forex',
-        title: true,
-      },
-      {
-        key: 'usd',
-        name: 'USD',
-        icon: 'font_download',
-        link: '/app/ui/typography'
-      },
-      {
-        key: 'inr',
-        name: 'INR',
-        icon: 'bookmark',
-        link: '/app/ui/icons'
       },
     ]
   },

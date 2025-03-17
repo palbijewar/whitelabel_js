@@ -1,58 +1,94 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button } from '@mui/material';
+import brand from 'enl-api/dummy/brand';
+import { Helmet } from 'react-helmet';
+import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
+import { CounterIconsWidget, PerformanceChartWidget } from 'enl-components';
+import useStyles from './dashboard-jss';
 
-const subscriptions = [
-  { id: 1, algo: 'BULL BEAR BANKNIFTY INTRADAY', quantity: 1, date: '2025-03-15 17:40:53' },
-  { id: 2, algo: 'IRON CONDOR (BANKNIFTY)', quantity: 1, date: '2025-02-11 11:32:48' },
-  { id: 3, algo: 'STRANGLE OPTION SELLING', quantity: 1, date: '2025-02-11 11:32:47' },
-  { id: 4, algo: 'STRADDLE OPTION SELLING', quantity: 1, date: '2025-02-11 11:32:46' },
-  { id: 5, algo: 'IRON FLY (BANKNIFTY)', quantity: 1, date: '2025-02-11 11:32:45' },
-  { id: 6, algo: 'THETA EATER OPTION SELLING', quantity: 1, date: '2025-02-11 11:32:43' },
-  { id: 7, algo: 'BREAKOUT CROSSOVER POSITIONAL NIFTY', quantity: 1, date: '2025-02-11 11:32:28' },
-  { id: 8, algo: 'BANKNIFTY SCALPER INTRADAY', quantity: 1, date: '2025-02-11 11:32:25' },
-  { id: 9, algo: 'BREAKOUT CROSSOVER POSITIONAL BANKNIFTY', quantity: 1, date: '2025-02-11 11:32:24' },
-  { id: 10, algo: 'PRIME BANKNIFTY INTRADAY', quantity: 1, date: '2025-02-07 11:31:11' },
-  { id: 11, algo: 'PRIME NIFTY INTRADAY', quantity: 1, date: '2025-02-07 11:30:33' },
-  { id: 12, algo: 'BULLBEAR NIFTY INTRADAY', quantity: 10, date: '2025-02-07 11:25:24' },
-  { id: 13, algo: 'NIFTY SCALPER INTRADAY', quantity: 1, date: '2025-02-03 15:58:58' },
-  { id: 14, algo: 'Reliance', quantity: 1, date: '2025-01-25 13:17:07' }
+const algoSignals = [
+  { id: 1, algo: 'BULLBEAR NIFTY INTRADAY', script: 'NIFTY13MAR2522450CE', quantity: 10, buyPrice: 225, sellPrice: 230, pnl: 50, status: 'Open' },
+  { id: 2, algo: 'BULL BEAR BANKNIFTY INTRADAY', script: 'BANKNIFTY27MAR2547900CE', quantity: 5, buyPrice: 475, sellPrice: 480, pnl: 25, status: 'Closed' },
+  { id: 3, algo: 'BULL BEAR BANKNIFTY INTRADAY', script: 'BANKNIFTY27MAR2547900CE', quantity: 7, buyPrice: 460, sellPrice: 455, pnl: -35, status: 'Open' }
 ];
 
-function SubscriptionTable() {
+function AnalyticDashboard() {
+  const title = brand.name + ' - Personal Dashboard';
+  const description = brand.desc;
+  const { classes } = useStyles();
+
   return (
-    <Paper sx={{ padding: 2, margin: 2, overflowX: 'auto' }}>
-      <Typography variant="h6" align="center" gutterBottom>
-        Subscriptions
-      </Typography>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: 'bold' }}>S.no</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Algo</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Date</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {subscriptions.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.algo}</TableCell>
-                <TableCell>{row.quantity}</TableCell>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>
-                  <Button variant="contained" color="primary" size="small" sx={{ marginRight: 1 }}>Edit</Button>
-                  <Button variant="contained" color="secondary" size="small">Unsubscribe</Button>
-                </TableCell>
+    <div>
+      <Helmet>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+      </Helmet>
+      {/* 1st Section */}
+      <Grid container spacing={3} className={classes.root}>
+        <Grid item xs={12}>
+          <CounterIconsWidget />
+        </Grid>
+      </Grid>
+      <Divider className={classes.divider} />
+      {/* 2nd Section */}
+      <Grid container spacing={3} className={classes.root}>
+        <Grid item xs={12}>
+          <PerformanceChartWidget />
+        </Grid>
+      </Grid>
+      <Divider className={classes.divider} />
+      {/* Algo Signals Table */}
+      <Paper sx={{ padding: 2, margin: 2, overflowX: 'auto' }}>
+        <Typography variant="h6" align="center" gutterBottom>
+          Algo Signals
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 800 }}>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ fontWeight: 'bold' }}>S.no</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Algo</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Script</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Buy Price</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Sell Price</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>PnL</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
+                <TableCell sx={{ fontWeight: 'bold' }}>Action</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+            </TableHead>
+            <TableBody>
+              {algoSignals.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.algo}</TableCell>
+                  <TableCell>{row.script}</TableCell>
+                  <TableCell>{row.quantity}</TableCell>
+                  <TableCell>{row.buyPrice}</TableCell>
+                  <TableCell>{row.sellPrice}</TableCell>
+                  <TableCell style={{ color: row.pnl >= 0 ? 'green' : 'red', fontWeight: 'bold' }}>{row.pnl}</TableCell>
+                  <TableCell>{row.status}</TableCell>
+                  <TableCell>
+                    <Button variant="contained" color="primary" size="small" sx={{ marginRight: 1 }}>SqOff</Button>
+                    <Button variant="contained" color="secondary" size="small">Retry</Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </div>
   );
 }
 
-export default SubscriptionTable;
+export default AnalyticDashboard;

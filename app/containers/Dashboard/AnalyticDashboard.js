@@ -11,7 +11,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import ReplayIcon from '@mui/icons-material/Replay';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { CounterIconsWidget, PerformanceChartWidget } from 'enl-components';
 import useStyles from './dashboard-jss';
 
@@ -78,8 +80,12 @@ function AnalyticDashboard() {
                   <TableCell style={{ color: row.pnl >= 0 ? 'green' : 'red', fontWeight: 'bold' }}>{row.pnl}</TableCell>
                   <TableCell>{row.status}</TableCell>
                   <TableCell>
-                    <Button variant="contained" color="primary" size="small" sx={{ marginRight: 1 }}>SqOff</Button>
-                    <Button variant="contained" color="secondary" size="small">Retry</Button>
+                    <IconButton color="primary" sx={{ marginRight: 1 }}>
+                      <HighlightOffIcon />
+                    </IconButton>
+                    <IconButton color="secondary">
+                      <ReplayIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}

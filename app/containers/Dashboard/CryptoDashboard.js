@@ -1,5 +1,7 @@
 import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button, IconButton } from '@mui/material';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import ReplayIcon from '@mui/icons-material/Replay';
 
 const subscriptions = [
   { id: 1, algo: 'BULLBEAR NIFTY INTRADAY', quantity: 10, tradeLimit: 50, status: 'Active' },
@@ -36,8 +38,12 @@ function SubscriptionTable() {
                 <TableCell>{row.tradeLimit}</TableCell>
                 <TableCell>{row.status}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="primary" size="small" sx={{ marginRight: 1 }}>Edit</Button>
-                  <Button variant="contained" color="secondary" size="small">Unsubscribe</Button>
+                  <IconButton color="primary" sx={{ marginRight: 1 }}>
+                    <HighlightOffIcon />
+                  </IconButton>
+                  <IconButton color="secondary">
+                    <ReplayIcon />
+                  </IconButton>
                 </TableCell>
               </TableRow>
             ))}

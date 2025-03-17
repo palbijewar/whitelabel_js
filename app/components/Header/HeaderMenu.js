@@ -20,10 +20,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import dummy from 'enl-api/dummy/dummyContents';
 import MenuIcon from '@mui/icons-material/Menu';
-import FullscreenOutlined from '@mui/icons-material/FullscreenOutlined';
-import FullscreenExitOutlined from '@mui/icons-material/FullscreenExitOutlined';
 import InvertColors from '@mui/icons-material/InvertColorsOutlined';
-import HelpOutlineOutlined from '@mui/icons-material/HelpOutlineOutlined';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import messages from './messages';
 import SelectLanguage from '../SelectLanguage';
@@ -34,8 +31,6 @@ import UserMenu from './UserMenu';
 import useStyles from './header-jss';
 import SearchUi from '../Search/SearchUi';
 
-const elem = document.documentElement;
-
 const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
   return <Link to={props.to} {...props} />; // eslint-disable-line
 });
@@ -43,7 +38,7 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 function HeaderMenu(props) { // eslint-disable-line
   const {
     changeMode, type, dataMenu,
-    history, openGuide, mode,
+    history, mode,
     toggleDrawerOpen, openMobileNav,
     isLogin, userAttr, signOut,
     loadTransition, logoLink,
@@ -52,7 +47,6 @@ function HeaderMenu(props) { // eslint-disable-line
   const lgUp = useMediaQuery(theme => theme.breakpoints.up('lg'));
   const lgDown = useMediaQuery(theme => theme.breakpoints.down('lg'));
 
-  const [fullScreen, setFullScreen] = useState(false);
   const [status, setStatus] = useState(dummy.user.status);
   const [anchorEl, setAnchorEl] = useState(null);
   const [fixed, setFixed] = useState(false);
@@ -67,32 +61,6 @@ function HeaderMenu(props) { // eslint-disable-line
     if (flagFixedMenu !== newFlagFixedMenu) {
       setFixed(newFlagFixedMenu);
       flagFixedMenu = newFlagFixedMenu;
-    }
-  };
-
-  const openFullScreen = () => {
-    setFullScreen(true);
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
-  };
-
-  const closeFullScreen = () => {
-    setFullScreen(false);
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
     }
   };
 
@@ -154,41 +122,15 @@ function HeaderMenu(props) { // eslint-disable-line
             </NavLink>
             <div className={classes.headerProperties}>
               <div className={cx(classes.headerAction, classes.invert)}>
-                {fullScreen ? (
-                  <Tooltip title="Exit Full Screen" placement="bottom">
-                    <IconButton className={classes.button} onClick={closeFullScreen} size="large">
-                      <FullscreenExitOutlined />
-                    </IconButton>
-                  </Tooltip>
-                ) : (
-                  <Tooltip title="Full Screen" placement="bottom">
-                    <IconButton className={classes.button} onClick={openFullScreen} size="large">
-                      <FullscreenOutlined />
-                    </IconButton>
-                  </Tooltip>
-                )}
                 <Tooltip title="Turn Dark/Light" placement="bottom">
                   <IconButton className={classes.button} onClick={() => turnMode(mode)} size="large">
                     <InvertColors />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Show Guide" placement="bottom">
-                  <IconButton className={classes.button} onClick={openGuide} size="large">
-                    <HelpOutlineOutlined />
                   </IconButton>
                 </Tooltip>
               </div>
             </div>
           </>
         )}
-        <div className={classes.searchHeaderMenu}>
-          <div className={cx(classes.wrapper, classes.dark)}>
-            <div className={classes.search}>
-              <SearchIcon />
-            </div>
-            <SearchUi history={history} />
-          </div>
-        </div>
         <Toolbar>
           <SelectLanguage />
           {isLogin

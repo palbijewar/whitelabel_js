@@ -151,54 +151,18 @@ function Header(props) {
                 showTitle && classes.fadeOut,
               )}
             >
-              {fullScreen ? (
-                <Tooltip title={intl.formatMessage(messages.fullScreen)} placement="bottom">
-                  <IconButton className={classes.button} onClick={closeFullScreen} size="large">
-                    <FullscreenExitOutlined />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title={intl.formatMessage(messages.exitFullScreen)} placement="bottom">
-                  <IconButton className={classes.button} onClick={openFullScreen} size="large">
-                    <FullscreenOutlined />
-                  </IconButton>
-                </Tooltip>
-              )}
               <Tooltip title={intl.formatMessage(messages.lamp)} placement="bottom">
                 <IconButton className={classes.button} onClick={() => turnMode(mode)} size="large">
                   <InvertColors />
                 </IconButton>
               </Tooltip>
-              <Tooltip title={intl.formatMessage(messages.guide)} placement="bottom">
-                <IconButton className={classes.button} onClick={openGuide} size="large">
-                  <HelpOutlineOutlined />
-                </IconButton>
-              </Tooltip>
             </div>
-            <Typography
-              component="h2"
-              className={cx(
-                classes.headerTitle,
-                showTitle && classes.show,
-              )}
-            >
-              {menuMessages[title] !== undefined ? <FormattedMessage {...menuMessages[title]} /> : title}
-            </Typography>
           </div>
         )}
-        <div className={classes.searchWrapper}>
-          <div className={classes.wrapper}>
-            <div className={classes.search}>
-              <SearchIcon />
-            </div>
-            <SearchUi history={history} />
-          </div>
-        </div>
         {!smDown && (
           <span className={classes.separatorV} />
         )}
         <div className={classes.userToolbar}>
-          <SelectLanguage />
           {isLogin
             ? <UserMenu signOut={signOut} avatar={avatar} />
             : (

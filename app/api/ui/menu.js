@@ -76,7 +76,7 @@ module.exports = [
         key: 'todo',
         name: 'Option 1',
         icon: 'check_circle',
-        link: '/app/containers/Tables/SignalsTable',
+        link: '/app/pages/todo',
       },
     ]
   },

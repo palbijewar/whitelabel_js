@@ -1,67 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
-import brand from 'enl-api/dummy/brand';
-import { SourceReader, PapperBlock } from 'enl-components';
-import { injectIntl } from 'react-intl';
-import messages from './messages';
-import {
-  TodoListMini,
-  ContactsMini,
-  TradeMini
-} from './demos';
+import { Card, CardContent, Typography } from '@mui/material';
 
-function MiniApps(props) {
-  const title = brand.name + ' - Widgets';
-  const description = brand.desc;
-  const docSrc = 'containers/Widgets/demos/';
-  const { intl } = props;
+function RelianceCard() {
   return (
-    <div>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-      </Helmet>
-      <PapperBlock
-        title={intl.formatMessage(messages.contactTitle)}
-        whiteBg
-        icon="contact_phone"
-        desc={intl.formatMessage(messages.contactDesc)}
-      >
-        <div>
-          <ContactsMini />
-          <SourceReader componentName={docSrc + 'ContactsMini.js'} />
-        </div>
-      </PapperBlock>
-      <PapperBlock
-        title={intl.formatMessage(messages.todoTitle)}
-        whiteBg
-        icon="playlist_add_check"
-        desc={intl.formatMessage(messages.contactDesc)}
-      >
-        <div>
-          <TodoListMini />
-          <SourceReader componentName={docSrc + 'TodoListMini.js'} />
-        </div>
-      </PapperBlock>
-      <PapperBlock
-        title={intl.formatMessage(messages.todoTitle)}
-        icon="compare_arrows"
-        desc={intl.formatMessage(messages.todoDesc)}
-      >
-        <div>
-          <TradeMini />
-          <SourceReader componentName={docSrc + 'TradeMini.js'} />
-        </div>
-      </PapperBlock>
-    </div>
+    <Card sx={{ maxWidth: 300, padding: 2, textAlign: 'center', boxShadow: 3, borderRadius: 2 }}>
+      <CardContent>
+        <Typography variant="h6" fontWeight="bold">Strategy Name</Typography>
+        <Typography variant="body2" color="textSecondary">Min Capital ~ 0</Typography>
+        <Typography variant="body2" color="textSecondary">Drawdown ~ 3</Typography>
+        <Typography variant="body2" color="textSecondary">Segment ~ NSE-STOCKS</Typography>
+      </CardContent>
+    </Card>
   );
 }
 
-MiniApps.propTypes = { intl: PropTypes.object.isRequired };
-
-export default injectIntl(MiniApps);
+export default RelianceCard;

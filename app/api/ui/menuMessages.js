@@ -426,7 +426,7 @@ export default defineMessages({
   },
   infographics_widget: {
     id: `${scope}.home.infographics_widget`,
-    defaultMessage: 'Infographics',
+    defaultMessage: 'Marketplace',
   },
   status_widget: {
     id: `${scope}.home.status_widget`,

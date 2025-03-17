@@ -4,15 +4,6 @@ module.exports = [
     name: 'Dashboard',
     icon: 'home',
     link: '/app',
-    child: [
-      {
-        key: 'dashboard',
-        name: 'Dashboard',
-        link: '/app',
-        icon: 'business',
-        badge: 'Hot'
-      },
-    ]
   },
   {
     key: 'Marketplace',
@@ -20,45 +11,28 @@ module.exports = [
     icon: 'widgets',
     child: [
       {
-        key: 'static_apps',
-        name: 'Group 1',
-        title: true,
+        key: 'PrimeAlgoStocks',
+        name: 'Prime Algo Stocks',
+        link: '/app/widgets/mini-apps',
+        icon: 'business',
       },
       {
-        key: 'contact',
-        name: 'Option 2',
-        icon: 'perm_contact_calendar',
-        link: '/app/pages/contact'
+        key: 'PrimeAlgoFO',
+        name: 'Prime Algo F&O',
+        link: '/app/widgets/mini-apps',
+        icon: 'business',
       },
       {
-        key: 'email',
-        name: 'Option 3',
-        icon: 'mail',
-        link: '/app/pages/email',
-        badge: '4'
+        key: 'PrimeAlgoMcx',
+        name: 'Prime Algo MCX',
+        link: '/app/widgets/mini-apps',
+        icon: 'business',
       },
       {
-        key: 'firebase_apps',
-        name: 'Group 1',
-        title: true,
-      },
-      {
-        key: 'todo_fullstack',
-        name: 'Option 1',
-        icon: 'check_circle',
-        link: '/app/pages/todo-firebase',
-      },
-      {
-        key: 'contact_fullstack',
-        name: 'Option 2',
-        icon: 'perm_contact_calendar',
-        link: '/app/pages/contact-firebase'
-      },
-      {
-        key: 'email_fullstack',
-        name: 'Option 3',
-        icon: 'mail',
-        link: '/app/pages/email-firebase',
+        key: 'PrimeAlgoCurrency',
+        name: 'Prime Algo Currency',
+        link: '/app/widgets/mini-apps',
+        icon: 'business',
       },
     ]
   },
@@ -66,33 +40,13 @@ module.exports = [
     key: 'Signals',
     name: 'Signals',
     icon: 'important_devices',
-    child: [
-      {
-        key: 'landing_page',
-        name: 'Landing Page',
-        title: true,
-      },
-      {
-        key: 'todo',
-        name: 'Option 1',
-        icon: 'check_circle',
-        link: '/app/pages/todo',
-      },
-    ]
+    link: '/app/pages/todo'
   },
   {
     key: 'Subscription',
     name: 'Subscription',
-    icon: 'Subscription',
-    child: [
-      {
-        key: 'banknifty',
-        name: 'BankNifty',
-        link: '/app/dashboard/crypto',
-        icon: 'business',
-        badge: 'Hot'
-      },
-    ]
+    icon: 'subscription',
+    link: '/app/dashboard/crypto'
   },
   {
     key: 'Notification',

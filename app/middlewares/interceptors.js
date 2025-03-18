@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import qs from 'qs';
 
-const API_BASE_URL = 'http://182.70.249.152:5000/api';
+const API_BASE_URL = 'test.primealgotech.com';
 
 const interceptorInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -63,7 +63,7 @@ export const signUpUser = async (formData) => {
     user_type: formData?.user_type,
     password: formData?.password,
     tag: 'regular'
-};
+  };
   // eslint-disable-next-line no-useless-catch
   try {
     const response = await interceptorInstance.post('/users/register', reqBody);

@@ -9,6 +9,8 @@ function TradingViewWidget() {
     script.type = 'text/javascript';
     script.async = true;
     script.innerHTML = `{
+      "width": "100%",
+      "height": "500",
       "autosize": true,
       "symbol": "NASDAQ:AAPL",
       "interval": "D",
@@ -24,8 +26,8 @@ function TradingViewWidget() {
   }, []);
 
   return (
-    <div className="tradingview-widget-container" ref={container} style={{ height: '700px', width: '100%' }}>
-      <div className="tradingview-widget-container__widget" style={{ height: '100%', width: '100%' }}></div>
+    <div className="tradingview-widget-container" ref={container}>
+      <div className="tradingview-widget-container__widget"></div>
       <div className="tradingview-widget-copyright">
         <a href="https://www.tradingview.com/" rel="noopener nofollow noreferrer" target="_blank">
         </a>

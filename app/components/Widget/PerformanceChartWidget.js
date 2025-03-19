@@ -13,11 +13,7 @@ function PerformanceChartWidget(props) {
   return (
     <div>
       <TradingViewTickerWidget/>
-      <PapperBlock whiteBg noMargin title={intl.formatMessage(messages.performance_indicator)} icon="timeline" desc="">
-
-        <TradingViewWidget/>
-
-      </PapperBlock>
+     
     </div>
   );
 }

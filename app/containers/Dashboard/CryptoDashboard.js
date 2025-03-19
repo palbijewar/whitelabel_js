@@ -1,5 +1,5 @@
-import React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Button, IconButton } from '@mui/material';
+import React, { useState } from 'react';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import ReplayIcon from '@mui/icons-material/Replay';
 
@@ -12,6 +12,23 @@ const subscriptions = [
 ];
 
 function SubscriptionTable() {
+  const [open, setOpen] = useState(false);
+  const [selectedAction, setSelectedAction] = useState(null);
+  
+  const handleClickOpen = (action) => {
+    setSelectedAction(action);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleConfirm = () => {
+    console.log(`${selectedAction} confirmed!`);
+    setOpen(false);
+  };
+
   return (
     <Paper sx={{ padding: 2, margin: 2, overflowX: 'auto' }}>
       <Typography variant="h6" align="center" gutterBottom>
@@ -21,12 +38,12 @@ function SubscriptionTable() {
         <Table sx={{ minWidth: 700 }}>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>S.no</TableCell>
-              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Algo</TableCell>
-              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Quantity</TableCell>
-              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Trade Limit</TableCell>
-              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Status</TableCell>
-              <TableCell sx={{ fontWeight: 'bold', whiteSpace: 'nowrap' }}>Action</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>S.no</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Algo</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Trade Limit</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Status</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -38,10 +55,10 @@ function SubscriptionTable() {
                 <TableCell>{row.tradeLimit}</TableCell>
                 <TableCell>{row.status}</TableCell>
                 <TableCell>
-                  <IconButton color="primary" sx={{ marginRight: 1 }}>
+                  <IconButton color="primary" sx={{ marginRight: 1 }} onClick={() => handleClickOpen('Square Off')}>
                     <HighlightOffIcon />
                   </IconButton>
-                  <IconButton color="secondary">
+                  <IconButton color="secondary" onClick={() => handleClickOpen('Retry')}>
                     <ReplayIcon />
                   </IconButton>
                 </TableCell>
@@ -50,6 +67,20 @@ function SubscriptionTable() {
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* Confirmation Dialog */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Confirm Action</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to proceed with {selectedAction}?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">No</Button>
+          <Button onClick={handleConfirm} color="primary" autoFocus>Yes</Button>
+        </DialogActions>
+      </Dialog>
     </Paper>
   );
 }

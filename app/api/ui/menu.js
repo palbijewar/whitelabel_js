@@ -37,16 +37,32 @@ module.exports = [
     ]
   },
   {
-    key: 'Signals',
+    key: 'signals',
     name: 'Signals',
     icon: 'important_devices',
-    link: '/app/pages/todo'
+    link: '/app/pages/todo',
+    child: [
+      {
+        key: 'signals-one',
+        name: 'Signal One',
+        icon: 'view_quilt',
+        link: '/app/pages/todo'
+      }
+    ]
   },
   {
-    key: 'Subscription',
+    key: 'subscription',
     name: 'Subscription',
     icon: 'subscription',
-    link: '/app/dashboard/crypto'
+    link: '/app/dashboard/crypto',
+    child: [
+      {
+        key: 'subscription-one',
+        name: 'subscription One',
+        icon: 'view_quilt',
+        link: '/app/dashboard/crypto'
+      }
+    ]
   },
   {
     key: 'Notification',

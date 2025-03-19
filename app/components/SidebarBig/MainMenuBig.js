@@ -70,6 +70,7 @@ function MainMenuBig(props) { // eslint-disable-line
       }
       return false;
     }
+
     if (child === selectedMenu) {
       return true;
     }
@@ -77,14 +78,10 @@ function MainMenuBig(props) { // eslint-disable-line
   };
 
   const getMenus = menuArray => menuArray.map((item, index) => {
-    if (item.key === 'menu_levels') {
-      return false;
-    }
     if (item.child) {
       return (
         <ButtonBase
           key={index.toString()}
-          focusRipple
           onClick={() => handleLoadMenu(item.child, item.key)}
           className={
             cx(

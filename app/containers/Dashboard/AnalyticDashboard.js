@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import brand from 'enl-api/dummy/brand';
 import { Helmet } from 'react-helmet';
 import Grid from '@mui/material/Grid';
@@ -14,8 +14,15 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import ReplayIcon from '@mui/icons-material/Replay';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 import { CounterIconsWidget, PerformanceChartWidget } from 'enl-components';
 import useStyles from './dashboard-jss';
+import TradingViewWidget from '../../components/Widget/TradingViewWidget';
 
 const algoSignals = [
   { id: 1, algo: 'BULLBEAR NIFTY INTRADAY', script: 'NIFTY13MAR2522450CE', quantity: 10, buyPrice: 225, sellPrice: 230, pnl: 50, status: 'Open' },
@@ -27,6 +34,27 @@ function AnalyticDashboard() {
   const title = brand.name + ' - Personal Dashboard';
   const description = brand.desc;
   const { classes } = useStyles();
+  
+  const [open, setOpen] = useState(false);
+  const [actionType, setActionType] = useState('');
+  const [selectedId, setSelectedId] = useState(null);
+  
+  const handleOpenDialog = (id, type) => {
+    setSelectedId(id);
+    setActionType(type);
+    setOpen(true);
+  };
+  
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedId(null);
+    setActionType('');
+  };
+  
+  const handleConfirm = () => {
+    console.log(`Performing ${actionType} action on ID: ${selectedId}`);
+    handleClose();
+  };
 
   return (
     <div>
@@ -34,21 +62,23 @@ function AnalyticDashboard() {
         <title>{title}</title>
         <meta name="description" content={description} />
       </Helmet>
-      {/* 1st Section */}
+      <Grid container spacing={3} className={classes.root}>
+        <Grid item xs={12}>
+          <PerformanceChartWidget />
+        </Grid>
+      </Grid>
       <Grid container spacing={3} className={classes.root}>
         <Grid item xs={12}>
           <CounterIconsWidget />
         </Grid>
       </Grid>
       <Divider className={classes.divider} />
-      {/* 2nd Section */}
       <Grid container spacing={3} className={classes.root}>
         <Grid item xs={12}>
-          <PerformanceChartWidget />
+          <TradingViewWidget/>
         </Grid>
       </Grid>
       <Divider className={classes.divider} />
-      {/* Algo Signals Table */}
       <Paper sx={{ padding: 2, margin: 2, overflowX: 'auto' }}>
         <Typography variant="h6" align="center" gutterBottom>
           Algo Signals
@@ -80,10 +110,10 @@ function AnalyticDashboard() {
                   <TableCell style={{ color: row.pnl >= 0 ? 'green' : 'red', fontWeight: 'bold' }}>{row.pnl}</TableCell>
                   <TableCell>{row.status}</TableCell>
                   <TableCell>
-                    <IconButton color="primary" sx={{ marginRight: 1 }}>
+                    <IconButton color="primary" sx={{ marginRight: 1 }} onClick={() => handleOpenDialog(row.id, 'Square Off')}>
                       <HighlightOffIcon />
                     </IconButton>
-                    <IconButton color="secondary">
+                    <IconButton color="secondary" onClick={() => handleOpenDialog(row.id, 'Retry')}>
                       <ReplayIcon />
                     </IconButton>
                   </TableCell>
@@ -93,6 +123,20 @@ function AnalyticDashboard() {
           </Table>
         </TableContainer>
       </Paper>
+
+      {/* Confirmation Dialog */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Confirm Action</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to {actionType} this trade?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">No</Button>
+          <Button onClick={handleConfirm} color="primary" autoFocus>Yes</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

@@ -18,22 +18,7 @@ const Breadcrumbs = (props) => {
   return (
     <section className={cx(theme === 'dark' ? classes.dark : classes.light, classes.breadcrumbs)}>
       <p>
-        You are here:
-        <span>
-          {
-            parts.map((part, partIndex) => {
-              const path = ['', ...parts.slice(0, partIndex + 1)].join('/');
-              return (
-                <Fragment key={path}>
-                  <Link to={path}>{part}</Link>
-                  { separator }
-                </Fragment>
-              );
-            })
-          }
-          &nbsp;
-          {place}
-        </span>
+        Page name
       </p>
     </section>
   );

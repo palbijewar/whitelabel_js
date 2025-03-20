@@ -22,7 +22,7 @@ function App(props) {
     <ThemeWrapper>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Corporate />}>
+          <Route path="/corporate" element={<Corporate />}>
             <Route index element={<HomePage />} />
           </Route>
           <Route path="app/*" element={<Application history={history} />} />
@@ -30,7 +30,7 @@ function App(props) {
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
             <Route path="reset-password" element={<ResetPassword />} />
-            <Route path="login-firebase" element={<LoginFullstack />} />
+            <Route path="/" element={<LoginFullstack />} />
             <Route path="register-firebase" element={<RegisterFullstack />} />
             <Route path="reset-firebase" element={<ResetPasswordFullstack />} />
             <Route path="lock-screen" element={<LockScreen />} />

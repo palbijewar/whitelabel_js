@@ -454,11 +454,13 @@ const useStyles = makeStyles()((theme, _params, classes) => ({
     alignItems: 'center'
   },
   userToolbar: {
+    marginLeft: 'auto',
     marginRight: theme.spacing(1),
     display: 'flex',
     alignItems: 'center',
     '& > *': {
-      marginRight: theme.spacing(0.5)
+      marginRight: theme.spacing(0.5),
+      marginLeft: theme.spacing(1),
     },
     [`& .${classes.buttonTop}`]: {
       [theme.breakpoints.down('sm')]: {

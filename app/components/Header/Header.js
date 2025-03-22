@@ -4,11 +4,7 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import SearchIcon from '@mui/icons-material/Search';
-import FullscreenOutlined from '@mui/icons-material/FullscreenOutlined';
-import FullscreenExitOutlined from '@mui/icons-material/FullscreenExitOutlined';
 import InvertColors from '@mui/icons-material/InvertColorsOutlined';
-import HelpOutlineOutlined from '@mui/icons-material/HelpOutlineOutlined';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -18,15 +14,11 @@ import { NavLink, Link } from 'react-router-dom';
 import brand from 'enl-api/dummy/brand';
 import logo from 'enl-images/logo.svg';
 import { injectIntl, FormattedMessage } from 'react-intl';
-import menuMessages from 'enl-api/ui/menuMessages';
 import link from 'enl-api/ui/link';
 import UserMenu from './UserMenu';
-import SearchUi from '../Search/SearchUi';
-import SelectLanguage from '../SelectLanguage';
 import messages from './messages';
 import useStyles from './header-jss';
-
-const elem = document.documentElement;
+import { getUserDetails } from '../../middlewares/interceptors';
 
 function Header(props) {
   const { classes, cx } = useStyles();
@@ -39,9 +31,6 @@ function Header(props) {
     toggleDrawerOpen,
     margin,
     mode,
-    title,
-    openGuide,
-    history,
     signOut,
     dense,
     isLogin,
@@ -49,13 +38,26 @@ function Header(props) {
     intl
   } = props;
   const [open] = useState(false);
-  const [fullScreen, setFullScreen] = useState(false);
   const [turnDarker, setTurnDarker] = useState(false);
   const [showTitle, setShowTitle] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   // Initial header style
   let flagDarker = false;
   let flagTitle = false;
+
+  useEffect(() => {
+    if (isLogin) {
+      getUserDetails()
+        .then((response) => {
+          console.log('User API Response:', response);
+          setUserId(response?.data?.user_id);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch user details:', error);
+        });
+    }
+  }, [isLogin]);
 
   const handleScroll = () => {
     const doc = document.documentElement;
@@ -69,35 +71,6 @@ function Header(props) {
     if (flagTitle !== newFlagTitle) {
       setShowTitle(newFlagTitle);
       flagTitle = newFlagTitle;
-    }
-  };
-
-  const openFullScreen = () => {
-    setFullScreen(true);
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-      /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-      /* Chrome, Safari & Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
-  };
-
-  const closeFullScreen = () => {
-    setFullScreen(false);
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
     }
   };
 
@@ -163,21 +136,25 @@ function Header(props) {
           <span className={classes.separatorV} />
         )}
         <div className={classes.userToolbar}>
-          {isLogin
-            ? <UserMenu signOut={signOut} avatar={avatar} />
-            : (
-              <Button
-                color="primary"
-                className={classes.buttonTop}
-                component={Link}
-                to={link.login}
-                variant="contained"
-              >
-                <AccountCircle />
-                <FormattedMessage {...messages.login} />
-              </Button>
-            )
-          }
+          {isLogin ? (
+            <>
+              <Typography variant="body1" style={{ marginRight: 10, color: mode === 'light' ? '#000' : '#fff' }}>
+                User ID: {userId || 'Loading...'}
+              </Typography>
+              <UserMenu signOut={signOut} avatar={avatar} />
+            </>
+          ) : (
+            <Button
+              color="primary"
+              className={classes.buttonTop}
+              component={Link}
+              to={link.login}
+              variant="contained"
+            >
+              <AccountCircle />
+              <FormattedMessage {...messages.login} />
+            </Button>
+          )}
         </div>
       </Toolbar>
     </AppBar>

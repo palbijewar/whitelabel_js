@@ -12,7 +12,16 @@ function TradingViewWidget() {
       "width": "100%",
       "height": "500",
       "autosize": true,
-      "symbol": "NASDAQ:AAPL",
+      "symbols": [
+        {
+          "description": "Nifty 50",
+          "proName": "NSE:NIFTY"
+        },
+        {
+          "description": "Bank Nifty",
+          "proName": "NSE:BANKNIFTY"
+        }
+      ],
       "interval": "D",
       "timezone": "Etc/UTC",
       "theme": "dark",

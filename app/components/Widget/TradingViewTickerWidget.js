@@ -10,11 +10,21 @@ function TradingViewTickerWidget() {
     script.async = true;
     script.innerHTML = `{
       "symbols": [
-        { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500 Index" },
-        { "proName": "FOREXCOM:NSXUSD", "title": "US 100 Cash CFD" },
-        { "proName": "FX_IDC:EURUSD", "title": "EUR to USD" },
-        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-        { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" }
+        { "proName": "NSE:NIFTY50", "title": "Nifty 50" },
+        { "proName": "NSE:CNXBANK", "title": "Bank Nifty" },
+        { "proName": "NSE:RELIANCE", "title": "Reliance Industries" },
+        { "proName": "NSE:TCS", "title": "TCS" },
+        { "proName": "NSE:INFY", "title": "Infosys" },
+        { "proName": "NSE:HDFCBANK", "title": "HDFC Bank" },
+        { "proName": "NSE:ICICIBANK", "title": "ICICI Bank" },
+        { "proName": "NSE:SBIN", "title": "State Bank of India" },
+        { "proName": "NSE:KOTAKBANK", "title": "Kotak Mahindra Bank" },
+        { "proName": "NSE:ITC", "title": "ITC" },
+        { "proName": "NSE:HINDUNILVR", "title": "Hindustan Unilever" },
+        { "proName": "NSE:LT", "title": "Larsen & Toubro" },
+        { "proName": "NSE:AXISBANK", "title": "Axis Bank" },
+        { "proName": "NSE:BHARTIARTL", "title": "Bharti Airtel" },
+        { "proName": "NSE:ASIANPAINT", "title": "Asian Paints" }
       ],
       "showSymbolLogo": true,
       "isTransparent": false,

@@ -15,10 +15,6 @@ import useStyles from './cover-jss';
 
 const optionsOpt = [
   'Edit Profile',
-  'Change Cover',
-  'Option 1',
-  'Option 2',
-  'Option 3',
 ];
 
 const ITEM_HEIGHT = 48;
@@ -38,6 +34,8 @@ function Cover(props) {
   const {
     avatar,
     name,
+    email,
+    mobile,
     desc,
     coverImg,
   } = props;
@@ -85,9 +83,15 @@ function Cover(props) {
         <Typography className={classes.subheading} gutterBottom>
           {desc}
         </Typography>
-        <Button className={classes.button} size="large" variant="contained" color="secondary">
+        <Typography  className={classes.name} gutterBottom>
+          {email}
+        </Typography>
+        <Typography className={classes.name} gutterBottom>
+          {mobile}
+        </Typography>
+        {/* <Button className={classes.button} size="large" variant="contained" color="secondary">
           <FormattedMessage {...messages.add_to_connection} />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

@@ -80,7 +80,7 @@ function LoginForm(props) {
         dispatch(
           loginUser(user.data)
         );
-        navigate('/app');
+        navigate('/app/dashboard');
       } catch (error) {
         console.error('Login error:', error);
         setServerMessage({

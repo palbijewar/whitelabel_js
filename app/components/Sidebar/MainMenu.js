@@ -119,7 +119,10 @@ function MainMenu(props) {
     return (
       <ListItem
         key={index.toString()}
-        className={cx(classes.nested, (item.link === '/app' && location.pathname !== '/app') ? 'rootPath' : '')}
+        className={cx(
+          classes.nested,
+          location.pathname === item.link ? classes.active : ''
+        )}
         component={NavLink}
         to={item.link}
         onClick={() => handleTransition()}

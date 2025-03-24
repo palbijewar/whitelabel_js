@@ -1,5 +1,4 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import qs from 'qs';
 
 const API_BASE_URL = 'https://test.primealgotech.com/api';
@@ -10,7 +9,7 @@ const interceptorInstance = axios.create({
 
 interceptorInstance.interceptors.request.use(
   (config) => {
-    const token = Cookies.get('access_token');
+    const token = localStorage.getItem('access_token');
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -27,9 +26,10 @@ interceptorInstance.interceptors.request.use(
 interceptorInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (!error.response) {
-      console.error('Network error:', error.message);
-      return Promise.reject(error);
+    if (error.response?.status === 401) {
+      console.warn('Unauthorized! Redirecting to login...');
+      localStorage.removeItem('access_token');
+      window.location.href = '/login';
     }
 
     return Promise.reject(error);
@@ -39,18 +39,20 @@ interceptorInstance.interceptors.response.use(
 export default interceptorInstance;
 
 export const loginService = async (credentials) => {
-  // eslint-disable-next-line no-useless-catch
   try {
-    const formData = qs.stringify(credentials);
-
-    const response = await interceptorInstance.post('/users/token', formData, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
+    const response = await interceptorInstance.post('/users/token', qs.stringify(credentials), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     });
+
+    console.log('Login response:', response.data);
+
+    if (response.data?.data?.access_token) {
+      localStorage.setItem('access_token', response.data.data.access_token);
+    }
 
     return response.data;
   } catch (error) {
+    console.error('Login error:', error.response?.data || error.message);
     throw error;
   }
 };
@@ -62,8 +64,9 @@ export const signUpUser = async (formData) => {
     mobile: formData?.mobile,
     user_type: formData?.user_type,
     password: formData?.password,
-    tag: 'regular'
+    tag: 'regular',
   };
+
   // eslint-disable-next-line no-useless-catch
   try {
     const response = await interceptorInstance.post('/users/register', reqBody);

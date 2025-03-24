@@ -1,146 +1,72 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
-import CardGiftcard from '@mui/icons-material/CardGiftcard';
-import LocalLibrary from '@mui/icons-material/LocalLibrary';
-import Computer from '@mui/icons-material/Computer';
-import Toys from '@mui/icons-material/Toys';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import Style from '@mui/icons-material/Style';
 import Typography from '@mui/material/Typography';
-import colorfull from 'enl-api/palette/colorfull';
+import Divider from '@mui/material/Divider';
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  CartesianAxis,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart, Pie, Cell,
-  Legend
+  PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import { dataSales } from 'enl-api/chart/chartData';
-import { data2 } from 'enl-api/chart/chartMiniData';
-import { injectIntl, FormattedMessage } from 'react-intl';
-import {
-  purple, blue, cyan, pink
-} from '@mui/material/colors';
-import messages from './messages';
+import { injectIntl } from 'react-intl';
 import useStyles from './widget-jss';
 import PapperBlock from '../PapperBlock/PapperBlock';
 
-const color = ({
-  primary: colorfull[0],
-  secondary: colorfull[1],
-  third: colorfull[2],
-  fourth: colorfull[3],
-});
+const COLORS = ['#FF0000', '#00A300'];
 
-const colorsPie = [purple[500], blue[500], cyan[500], pink[500]];
+const dataSales = [
+  { name: 'Loss', value: 300 },
+  { name: 'Profit', value: 400 },
+];
 
-function SalesChartWidget(props) {
-  const { intl } = props;
-  const { classes, cx } = useStyles();
+function SalesChartWidget() {
+  const { classes } = useStyles();
 
   return (
-    <PapperBlock whiteBg noMargin title={intl.formatMessage(messages.product_title)} icon="bar_chart" desc="">
-      <Grid container spacing={2}>
-        <Grid item md={8} xs={12}>
-          <ul className={classes.bigResume}>
-            <li>
-              <Avatar className={cx(classes.avatar, classes.pinkAvatar)}>
-                <LocalLibrary />
-              </Avatar>
-              <Typography variant="h6">
-                <span className={classes.pinkText}>4321</span>
-                <Typography>
-                  <FormattedMessage {...messages.fashions} />
-                </Typography>
-              </Typography>
-            </li>
-            <li>
-              <Avatar className={cx(classes.avatar, classes.purpleAvatar)}>
-                <Computer />
-              </Avatar>
-              <Typography variant="h6">
-                <span className={classes.purpleText}>9876</span>
-                <Typography>
-                  <FormattedMessage {...messages.electronics} />
-                </Typography>
-              </Typography>
-            </li>
-            <li>
-              <Avatar className={cx(classes.avatar, classes.blueAvatar)}>
-                <Toys />
-              </Avatar>
-              <Typography variant="h6">
-                <span className={classes.blueText}>345</span>
-                <Typography>
-                  <FormattedMessage {...messages.toys} />
-                </Typography>
-              </Typography>
-            </li>
-            <li>
-              <Avatar className={cx(classes.avatar, classes.tealAvatar)}>
-                <Style />
-              </Avatar>
-              <Typography variant="h6">
-                <span className={classes.tealText}>1021</span>
-                <Typography>
-                  <FormattedMessage {...messages.vouchers} />
-                </Typography>
-              </Typography>
-            </li>
-          </ul>
-          <div className={classes.chartWrap}>
-            <div className={classes.chartFluid}>
-              <ResponsiveContainer width={800} height="80%">
-                <BarChart
-                  data={dataSales}
-                >
-                  <XAxis dataKey="name" tickLine={false} />
-                  <YAxis axisLine={false} tickSize={3} tickLine={false} tick={{ stroke: 'none' }} />
-                  <CartesianGrid vertical={false} strokeDasharray="3 3" />
-                  <CartesianAxis />
-                  <Tooltip />
-                  <Bar dataKey="Fashions" fill={color.primary} />
-                  <Bar dataKey="Electronics" fill={color.secondary} />
-                  <Bar dataKey="Toys" fill={color.third} />
-                  <Bar dataKey="Vouchers" fill={color.fourth} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
+    <PapperBlock whiteBg noMargin title="Today P&L" icon="pie_chart" desc="">
+      <Grid container spacing={3}>
+        {/* Summary Section */}
+        <Grid item xs={12}>
+          <Grid container spacing={3} justifyContent="space-around">
+            <Grid item>
+              <Typography variant="subtitle1">Total Buy Value</Typography>
+              <Typography variant="h6" color="primary">₹5,00,000</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1">P & L</Typography>
+              <Typography variant="h6" color="secondary">₹25,000</Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1">Total Sell Value</Typography>
+              <Typography variant="h6" color="primary">₹5,25,000</Typography>
+            </Grid>
+          </Grid>
+          <Divider className={classes.divider} sx={{ marginTop: 2 }} />
         </Grid>
-        <Grid item md={4} xs={12}>
-          <Typography className={classes.smallTitle} variant="button">
-            <CardGiftcard className={classes.leftIcon} />
-            <FormattedMessage {...messages.today_sales} />
+
+        {/* Chart Section */}
+        <Grid item xs={12}>
+          <Typography variant="h6" align="center" sx={{ paddingBottom: 2 }}>
+            CHART & GRAPH
           </Typography>
-          <Divider className={classes.divider} />
-          <Grid container className={classes.secondaryWrap}>
-            <PieChart width={300} height={300}>
+          <ResponsiveContainer width="100%" height={350}>
+            <PieChart>
               <Pie
-                data={data2}
-                cx={150}
-                cy={100}
+                data={dataSales}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={120}
+                fill="#8884d8"
                 dataKey="value"
-                innerRadius={40}
-                outerRadius={80}
-                fill="#FFFFFF"
-                paddingAngle={5}
                 label
               >
-                {
-                  data2.map((entry, index) => <Cell key={index.toString()} fill={colorsPie[index % colorsPie.length]} />)
-                }
+                {dataSales.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
               </Pie>
-              <Legend iconType="circle" verticalALign="bottom" iconSize={10} />
+              <Tooltip />
+              <Legend verticalAlign="bottom" height={40} />
             </PieChart>
-          </Grid>
+          </ResponsiveContainer>
         </Grid>
       </Grid>
     </PapperBlock>

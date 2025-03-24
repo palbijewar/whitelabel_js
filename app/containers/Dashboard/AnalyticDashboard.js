@@ -21,36 +21,49 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import { CounterIconsWidget, PerformanceChartWidget } from 'enl-components';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import useStyles from './dashboard-jss';
 import TradingViewWidget from '../../components/Widget/TradingViewWidget';
 
 const algoSignals = [
-  { id: 1, algo: 'BULLBEAR NIFTY INTRADAY', script: 'NIFTY13MAR2522450CE', quantity: 10, buyPrice: 225, sellPrice: 230, pnl: 50, status: 'Open' },
-  { id: 2, algo: 'BULL BEAR BANKNIFTY INTRADAY', script: 'BANKNIFTY27MAR2547900CE', quantity: 5, buyPrice: 475, sellPrice: 480, pnl: 25, status: 'Closed' },
-  { id: 3, algo: 'BULL BEAR BANKNIFTY INTRADAY', script: 'BANKNIFTY27MAR2547900CE', quantity: 7, buyPrice: 460, sellPrice: 455, pnl: -35, status: 'Open' }
+  {
+    id: 1, algo: 'BULLBEAR NIFTY INTRADAY', script: 'NIFTY13MAR2522450CE', quantity: 10, buyPrice: 225, sellPrice: 230, pnl: 50, status: 'Open'
+  },
+  {
+    id: 2, algo: 'BULL BEAR BANKNIFTY INTRADAY', script: 'BANKNIFTY27MAR2547900CE', quantity: 5, buyPrice: 475, sellPrice: 480, pnl: 25, status: 'Closed'
+  },
+  {
+    id: 3, algo: 'BULL BEAR BANKNIFTY INTRADAY', script: 'BANKNIFTY27MAR2547900CE', quantity: 7, buyPrice: 460, sellPrice: 455, pnl: -35, status: 'Open'
+  }
 ];
 
 function AnalyticDashboard() {
   const title = brand.name + ' - Personal Dashboard';
   const description = brand.desc;
   const { classes } = useStyles();
-  
+
   const [open, setOpen] = useState(false);
   const [actionType, setActionType] = useState('');
   const [selectedId, setSelectedId] = useState(null);
-  
+  const [isPaperTrade, setIsPaperTrade] = useState(true);
+
+  const handleToggle = () => {
+    setIsPaperTrade(!isPaperTrade);
+  };
+
   const handleOpenDialog = (id, type) => {
     setSelectedId(id);
     setActionType(type);
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
     setSelectedId(null);
     setActionType('');
   };
-  
+
   const handleConfirm = () => {
     console.log(`Performing ${actionType} action on ID: ${selectedId}`);
     handleClose();
@@ -72,7 +85,14 @@ function AnalyticDashboard() {
           <CounterIconsWidget />
         </Grid>
       </Grid>
+
       <Divider className={classes.divider} />
+      <Grid container justifyContent="space-between" alignItems="center">
+        <FormControlLabel
+          control={<Switch checked={isPaperTrade} onChange={handleToggle} />}
+          label={isPaperTrade ? 'PAPER TRADE' : 'LIVE'}
+        />
+      </Grid>
       <Grid container spacing={3} className={classes.root}>
         <Grid item xs={12}>
           <TradingViewWidget/>

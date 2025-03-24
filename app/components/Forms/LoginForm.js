@@ -42,7 +42,7 @@ function LoginForm(props) {
   const dispatch = useDispatch();
   const mdUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
   const navigate = useNavigate();
-  const { link, intl, messagesAuth, closeMsg } = props;
+  const { link } = props;
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);

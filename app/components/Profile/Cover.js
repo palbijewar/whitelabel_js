@@ -4,13 +4,13 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import VerifiedUser from '@mui/icons-material/VerifiedUser';
 import Info from '@mui/icons-material/Info';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { injectIntl, FormattedMessage } from 'react-intl';
-import messages from './messages';
+import { injectIntl } from 'react-intl';
+// import messages from './messages';
 import useStyles from './cover-jss';
 
 const optionsOpt = [
@@ -102,6 +102,8 @@ Cover.propTypes = {
   name: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
   coverImg: PropTypes.string.isRequired,
+  email: PropTypes.string,
+  mobile: PropTypes.string,
 };
 
 export default injectIntl(Cover);

@@ -47,8 +47,8 @@ function UserProfile(props) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userData = await getUserDetails();
-        setUser(userData);
+        const userFetchedData = await getUserDetails();
+        setUser(userFetchedData);
       } catch (error) {
         console.error('Failed to fetch user details:', error);
       }

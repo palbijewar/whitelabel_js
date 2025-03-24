@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import brand from 'enl-api/dummy/brand';
@@ -19,6 +19,8 @@ import {
 import useStyles from 'enl-components/Profile/cover-jss';
 import { injectIntl } from 'react-intl';
 import messages from 'enl-components/Profile/messages';
+
+import { getUserDetails } from '../../../middlewares/interceptors';
 
 function TabContainer(props) {
   const { children } = props;
@@ -41,6 +43,22 @@ function UserProfile(props) {
   const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
   const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
 
+  const [userData, setUser] = useState(null);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userFetchedData = await getUserDetails();
+        setUser(userFetchedData);
+      } catch (error) {
+        console.error('Failed to fetch user details:', error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const userDetails = userData?.data;
+
   const handleChange = (event, val) => {
     setValue(val);
   };
@@ -58,8 +76,10 @@ function UserProfile(props) {
       <Cover
         coverImg=""
         avatar={dummy.user.avatar}
-        name={dummy.user.name}
-        desc="Consectetur adipiscing elit."
+        name={userDetails?.name}
+        desc=""
+        mobile={userDetails?.mobile}
+        email={userDetails?.email}
       />
       <AppBar position="static" className={classes.profileTab}>
         {!mdUp && (

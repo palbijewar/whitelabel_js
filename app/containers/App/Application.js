@@ -48,6 +48,7 @@ function Application(props) {
       <Routes>
         { /* Home */ }
         <Route path="/" element={<AnalyticDashboard />} />
+        <Route path="dashboard" element={<AnalyticDashboard />} />
         <Route path="dashboard/marketing" element={<MarketingDashboard />} />
         <Route path="dashboard/crypto" element={<CryptoDashboard />} />
         { /* Widgets */ }

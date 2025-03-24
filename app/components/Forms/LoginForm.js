@@ -33,16 +33,15 @@ const validationSchema = yup.object({
   password: yup.string().required('Password is required'),
 });
 
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) {
-  return <NavLink to={props.to} {...props} />;
-});
+// eslint-disable-next-line react/display-name, react/prop-types
+const LinkBtn = React.forwardRef((props) => <NavLink to={props.to} {...props} />);
 
 function LoginForm(props) {
   const { classes, cx } = useStyles();
   const dispatch = useDispatch();
   const mdUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
   const navigate = useNavigate();
-  const { link, intl, messagesAuth, closeMsg } = props;
+  const { link } = props;
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -80,7 +79,7 @@ function LoginForm(props) {
         dispatch(
           loginUser(user.data)
         );
-        navigate('/app');
+        navigate('/app/dashboard');
       } catch (error) {
         console.error('Login error:', error);
         setServerMessage({

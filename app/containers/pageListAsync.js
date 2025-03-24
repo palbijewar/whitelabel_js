@@ -225,6 +225,12 @@ export const InvoicePage = loadable(() => import('./Pages/Ecommerce/InvoicePage'
 export const Profile = loadable(() => import('./Pages/UserProfile'), {
   fallback: <Loading />,
 });
+export const UpdateUser = loadable(() => import('./Pages/Users/UpdateUser'), {
+  fallback: <Loading />,
+});
+export const NotificationDashboard = loadable(() => import('./Pages/Users/NotificationDashboard'), {
+  fallback: <Loading />,
+});
 export const Timeline = loadable(() => import('./Pages/Timeline'), {
   fallback: <Loading />,
 });

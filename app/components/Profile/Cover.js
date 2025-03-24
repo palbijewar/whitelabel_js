@@ -1,58 +1,69 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Avatar from "@mui/material/Avatar";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 // import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import VerifiedUser from '@mui/icons-material/VerifiedUser';
-import Info from '@mui/icons-material/Info';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { injectIntl } from 'react-intl';
+import IconButton from "@mui/material/IconButton";
+import VerifiedUser from "@mui/icons-material/VerifiedUser";
+import Info from "@mui/icons-material/Info";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { injectIntl } from "react-intl";
 // import messages from './messages';
-import useStyles from './cover-jss';
+import useStyles from "./cover-jss";
+import { useNavigate } from "react-router-dom";
 
-const optionsOpt = [
-  'Edit Profile',
-];
+const optionsOpt = ["Edit Profile"];
 
 const ITEM_HEIGHT = 48;
 
 function Cover(props) {
   const [anchorElOpt, setAnchorElOpt] = useState(null);
 
-  const handleClickOpt = event => {
+  const handleClickOpt = (event) => {
     setAnchorElOpt(event.currentTarget);
   };
 
-  const handleCloseOpt = () => {
-    setAnchorElOpt(null);
-  };
+  const navigate = useNavigate();
 
   const { classes } = useStyles();
-  const {
-    avatar,
-    name,
-    email,
-    mobile,
-    desc,
-    coverImg,
-  } = props;
+  const { avatar, name, email, mobile, desc, coverImg } = props;
+
+  const handleCloseOpt = (option) => {
+    setAnchorElOpt(null);
+    switch (option) {
+      case "Edit Profile":
+        navigate("/app/pages/edit-profile", {
+          state: {
+            name: name,
+            email: email,
+            phone: mobile,
+          },
+        });
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
-    <div className={classes.cover} style={{ backgroundImage: `url(${coverImg})` }}>
+    <div
+      className={classes.cover}
+      style={{ backgroundImage: `url(${coverImg})` }}
+    >
       <div className={classes.opt}>
         <IconButton className={classes.button} aria-label="Delete" size="large">
           <Info />
         </IconButton>
         <IconButton
           aria-label="More"
-          aria-owns={anchorElOpt ? 'long-menu' : null}
+          aria-owns={anchorElOpt ? "long-menu" : null}
           aria-haspopup="true"
           className={classes.button}
           onClick={handleClickOpt}
-          size="large">
+          size="large"
+        >
           <MoreVertIcon />
         </IconButton>
         <Menu
@@ -67,8 +78,12 @@ function Cover(props) {
             },
           }}
         >
-          {optionsOpt.map(option => (
-            <MenuItem key={option} selected={option === 'Edit Profile'} onClick={handleCloseOpt}>
+          {optionsOpt.map((option) => (
+            <MenuItem
+              key={option}
+              selected={option === "Edit Profile"}
+              onClick={() => handleCloseOpt(option)}
+            >
               {option}
             </MenuItem>
           ))}
@@ -83,7 +98,7 @@ function Cover(props) {
         <Typography className={classes.subheading} gutterBottom>
           {desc}
         </Typography>
-        <Typography  className={classes.name} gutterBottom>
+        <Typography className={classes.name} gutterBottom>
           {email}
         </Typography>
         <Typography className={classes.name} gutterBottom>

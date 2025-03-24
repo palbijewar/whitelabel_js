@@ -34,7 +34,9 @@ import {
   Photos, Error,
   MapMarker, MapDirection, SearchMap,
   TrafficIndicator, StreetViewMap,
-  NotFound
+  NotFound,
+  UpdateUser,
+  NotificationDashboard
 } from '../pageListAsync';
 import TradeOrdersTable from '../Tables/TradeOrders';
 import TradeSignalsTable from '../Tables/TradeSignals';
@@ -127,6 +129,8 @@ function Application(props) {
         { /* Pages */ }
         <Route path="pages" element={<Parent />} />
         <Route path="pages/user-profile" element={<Profile />} />
+        <Route path="pages/edit-profile" element={<UpdateUser />} />
+        <Route path="pages/user-notifications" element={<NotificationDashboard />} />
         <Route path="pages/timeline" element={<Timeline />} />
         <Route path="pages/chat" element={<Chat />} />
         <Route path="pages/ecommerce" element={<Ecommerce />} />

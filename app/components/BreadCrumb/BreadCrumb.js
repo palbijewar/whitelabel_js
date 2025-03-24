@@ -18,7 +18,7 @@ const Breadcrumbs = (props) => {
   return (
     <section className={cx(theme === 'dark' ? classes.dark : classes.light, classes.breadcrumbs)}>
       <p>
-        Page name
+        
       </p>
     </section>
   );

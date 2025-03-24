@@ -37,45 +37,47 @@ function SymbolTable() {
   };
 
   return (
-    <TableContainer component={Paper} className={classes.table}>
-      <Typography variant="h6" align="center" sx={{ padding: 2 }}>
-        Trading Symbols
+    <TableContainer component={Paper} className={classes.table} sx={{ maxHeight: 300, overflowY: 'auto' }}>
+      <Typography variant="subtitle1" align="center" sx={{ padding: 1 }}>
+    Trading Symbols
       </Typography>
-      <Table>
+      <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: 'bold' }}>Symbols</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Select (Lots)</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Select Strategy</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Product Class</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Action</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', padding: '4px' }}>Symbols</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', padding: '4px' }}>Qty</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', padding: '4px' }}>Lots</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', padding: '4px' }}>Strategy</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', padding: '4px' }}>Class</TableCell>
+            <TableCell sx={{ fontWeight: 'bold', padding: '4px' }}>Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.symbol}</TableCell>
-              <TableCell>{row.quantity}</TableCell>
-              <TableCell>
-                <Select value={row.lots} size="small">
+              <TableCell sx={{ padding: '4px' }}>{row.symbol}</TableCell>
+              <TableCell sx={{ padding: '4px' }}>{row.quantity}</TableCell>
+              <TableCell sx={{ padding: '4px' }}>
+                <Select value={row.lots} size="small" sx={{ minWidth: 50 }}>
                   <MenuItem value={1}>1</MenuItem>
                   <MenuItem value={2}>2</MenuItem>
                   <MenuItem value={3}>3</MenuItem>
                 </Select>
               </TableCell>
-              <TableCell>
-                <Select value={row.strategy} size="small">
+              <TableCell sx={{ padding: '4px' }}>
+                <Select value={row.strategy} size="small" sx={{ minWidth: 80 }}>
                   <MenuItem value="BREAKOUT">BREAKOUT</MenuItem>
                   <MenuItem value="REVERSAL">REVERSAL</MenuItem>
                   <MenuItem value="SCALPING">SCALPING</MenuItem>
                 </Select>
               </TableCell>
-              <TableCell>{row.productClass}</TableCell>
-              <TableCell>
+              <TableCell sx={{ padding: '4px' }}>{row.productClass}</TableCell>
+              <TableCell sx={{ padding: '4px' }}>
                 <Button
                   variant="contained"
                   color={row.action === 'Activate' ? 'primary' : 'secondary'}
+                  size="small"
+                  sx={{ minWidth: 80 }}
                   onClick={() => handleActionClick(row.id)}
                 >
                   {row.action}

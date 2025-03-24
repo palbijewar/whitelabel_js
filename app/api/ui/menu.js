@@ -30,16 +30,10 @@ module.exports = [
     icon: 'important_devices',
     child: [
       {
-        key: 'trade-orders',
-        name: 'Trade Orders',
+        key: 'trade-statusorders',
+        name: 'Trade Status',
         icon: 'view_quilt',
         link: '/app/tables/trade-orders'
-      },
-      {
-        key: 'trade-signals',
-        name: 'Trade Signals',
-        icon: 'view_quilt',
-        link: '/app/tables/trade-signals'
       }
     ]
   },
@@ -75,10 +69,17 @@ module.exports = [
     ]
   },
   {
-    key: 'signals',
-    name: 'Signals',
+    key: 'trading-status',
+    name: 'Trading Status',
     icon: 'important_devices',
-    linkParent: '/app/pages/todo',
+    child: [
+      {
+        key: 'Broker-Response',
+        name: 'Broker Response',
+        icon: 'view_quilt',
+        link: '/app/tables/trade-orders'
+      }
+    ]
   },
   {
     key: 'subscription',
@@ -205,8 +206,8 @@ module.exports = [
     // ]
   },
   {
-    key: 'Api Connection',
-    name: 'Api Connection',
+    key: 'connect-broker',
+    name: 'Connect Broker',
     icon: 'extension',
     child: [
       {
@@ -240,6 +241,12 @@ module.exports = [
         link: '/app/ui/drawer-menu'
       }
     ]
+  },
+  {
+    key: 'login-status',
+    name: 'Login Status',
+    icon: 'important_devices',
+    linkParent: '/app/pages/todo',
   },
   {
     key: 'settings',

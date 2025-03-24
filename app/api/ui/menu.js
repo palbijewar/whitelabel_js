@@ -6,6 +6,44 @@ module.exports = [
     link: '/app',
   },
   {
+    key: 'trading-details',
+    name: 'Trading Details',
+    icon: 'important_devices',
+    child: [
+      {
+        key: 'trade-orders',
+        name: 'Trade Orders',
+        icon: 'view_quilt',
+        link: '/app/tables/trade-orders'
+      },
+      {
+        key: 'trade-signals',
+        name: 'Trade Signals',
+        icon: 'view_quilt',
+        link: '/app/tables/trade-signals'
+      }
+    ]
+  },
+  {
+    key: 'trading-status',
+    name: 'Trading Status',
+    icon: 'important_devices',
+    child: [
+      {
+        key: 'trade-orders',
+        name: 'Trade Orders',
+        icon: 'view_quilt',
+        link: '/app/tables/trade-orders'
+      },
+      {
+        key: 'trade-signals',
+        name: 'Trade Signals',
+        icon: 'view_quilt',
+        link: '/app/tables/trade-signals'
+      }
+    ]
+  },
+  {
     key: 'Marketplace',
     name: 'Marketplace',
     icon: 'widgets',

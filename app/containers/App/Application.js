@@ -36,6 +36,8 @@ import {
   TrafficIndicator, StreetViewMap,
   NotFound
 } from '../pageListAsync';
+import TradeOrdersTable from '../Tables/TradeOrders';
+import TradeSignalsTable from '../Tables/TradeSignals';
 
 function Application(props) {
   const { history } = props;
@@ -67,6 +69,8 @@ function Application(props) {
         <Route path="tables/table-playground" element={<TablePlayground />} />
         <Route path="tables/editable-cell" element={<EditableCell />} />
         <Route path="tables/tree-table" element={<TreeTable />} />
+        <Route path="tables/trade-orders" element={<TradeOrdersTable />} />
+        <Route path="tables/trade-signals" element={<TradeSignalsTable />} />
         { /* Form & Button */ }
         <Route path="forms" element={<Parent />} />
         <Route path="forms/formikform" element={<FormikForm />} />

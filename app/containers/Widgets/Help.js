@@ -12,7 +12,7 @@ function Help() {
       <Typography variant="body1" display="flex" alignItems="center" justifyContent="center" gap={1}>
         <PhoneIcon />
         <Link href="tel:+1234567890" underline="hover">
-          +1 234 567 890
+          +918920400946
         </Link>
       </Typography>
       <Typography variant="body1" display="flex" alignItems="center" justifyContent="center" gap={1} mt={1}>

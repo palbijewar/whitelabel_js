@@ -40,6 +40,9 @@ import {
 } from '../pageListAsync';
 import TradeOrdersTable from '../Tables/TradeOrders';
 import TradeSignalsTable from '../Tables/TradeSignals';
+import BrokerResponse from '../Widgets/BrokerResponse';
+import Help from '../Widgets/Help';
+import TradingStatus from '../../components/Tables/TradingStatus';
 
 function Application(props) {
   const { history } = props;
@@ -60,6 +63,8 @@ function Application(props) {
         <Route path="widgets/analytics" element={<Analytics />} />
         <Route path="widgets/gallery-carousel" element={<Gallery />} />
         <Route path="widgets/status" element={<Status />} />
+        <Route path="widgets/broker-response" element={<BrokerResponse />} />
+        <Route path="widgets/help" element={<Help />} />
         { /* Layout */ }
         <Route path="layouts" element={<Parent />} />
         <Route path="layouts/grid" element={<Grid />} />
@@ -74,6 +79,7 @@ function Application(props) {
         <Route path="tables/tree-table" element={<TreeTable />} />
         <Route path="tables/trade-orders" element={<TradeOrdersTable />} />
         <Route path="tables/trade-signals" element={<TradeSignalsTable />} />
+        <Route path="tables/trading-status" element={<TradingStatus />} />
         { /* Form & Button */ }
         <Route path="forms" element={<Parent />} />
         <Route path="forms/formikform" element={<FormikForm />} />

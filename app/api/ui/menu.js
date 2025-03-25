@@ -2,24 +2,24 @@ module.exports = [
   {
     key: 'home',
     name: 'Dashboard',
-    icon: 'home',
+    icon: 'dashboard',
     linkParent: '/app/dashboard',
   },
   {
     key: 'trading-details',
     name: 'Trading Details',
-    icon: 'important_devices',
+    icon: 'bar_chart',
     child: [
       {
         key: 'trade-orders',
         name: 'Trade Orders',
-        icon: 'view_quilt',
+        icon: 'list_alt',
         link: '/app/tables/trade-orders'
       },
       {
         key: 'trade-signals',
         name: 'Trade Signals',
-        icon: 'view_quilt',
+        icon: 'timeline',
         link: '/app/tables/trade-signals'
       }
     ]
@@ -27,217 +27,91 @@ module.exports = [
   {
     key: 'trading-status',
     name: 'Trading Status',
-    icon: 'important_devices',
-    child: [
-      {
-        key: 'trade-statusorders',
-        name: 'Trade Status',
-        icon: 'view_quilt',
-        link: '/app/tables/trade-orders'
-      }
-    ]
+    icon: 'show_chart',
+    linkParent: '/app/tables/trading-status',
   },
   {
     key: 'Marketplace',
     name: 'Marketplace',
-    icon: 'widgets',
+    icon: 'storefront',
     child: [
       {
         key: 'PrimeAlgoStocks',
         name: 'Prime Algo Stocks',
         link: '/app/widgets/mini-apps',
-        icon: 'business',
+        icon: 'trending_up',
       },
       {
         key: 'PrimeAlgoFO',
         name: 'Prime Algo F&O',
         link: '/app/widgets/mini-apps',
-        icon: 'business',
+        icon: 'assessment',
       },
       {
         key: 'PrimeAlgoMcx',
         name: 'Prime Algo MCX',
         link: '/app/widgets/mini-apps',
-        icon: 'business',
+        icon: 'leaderboard',
       },
       {
         key: 'PrimeAlgoCurrency',
         name: 'Prime Algo Currency',
         link: '/app/widgets/mini-apps',
-        icon: 'business',
+        icon: 'attach_money',
       },
     ]
   },
   {
-    key: 'trading-status',
-    name: 'Trading Status',
-    icon: 'important_devices',
-    child: [
-      {
-        key: 'Broker-Response',
-        name: 'Broker Response',
-        icon: 'view_quilt',
-        link: '/app/tables/trade-orders'
-      }
-    ]
+    key: 'broker-response',
+    name: 'Broker Response',
+    icon: 'receipt_long',
+    linkParent: '/app/widgets/broker-response',
   },
   {
     key: 'subscription',
     name: 'Subscription',
-    icon: 'subscription',
+    icon: 'subscriptions',
     linkParent: '/app/dashboard/crypto',
   },
   {
     key: 'Notification',
     name: 'Notification',
-    icon: 'border_color',
+    icon: 'notifications',
     linkParent: '/app/pages/user-notifications',
-    // child: [
-    //   {
-    //     key: 'landing_page',
-    //     name: 'Landing Page',
-    //     title: true,
-    //   },
-    //   {
-    //     key: 'corporate',
-    //     name: 'Corporate',
-    //     link: '/',
-    //     icon: 'business',
-    //     badge: 'Hot'
-    //   },
-    //   {
-    //     key: 'dashboard',
-    //     name: 'Dashboard',
-    //     title: true,
-    //   },
-    //   {
-    //     key: 'personal',
-    //     name: 'Analytic',
-    //     icon: 'settings_brightness',
-    //     link: '/app'
-    //   },
-    //   {
-    //     key: 'crm',
-    //     name: 'Marketing',
-    //     icon: 'settings_system_daydream',
-    //     link: '/app/dashboard/marketing'
-    //   },
-    //   {
-    //     key: 'crypto',
-    //     name: 'Cryptocurrency',
-    //     icon: 'local_atm',
-    //     link: '/app/dashboard/crypto'
-    //   },
-    //   {
-    //     key: 'widgets',
-    //     name: 'Widgets',
-    //     title: true,
-    //   },
-    //   {
-    //     key: 'infographics_widget',
-    //     icon: 'timelapse',
-    //     name: 'Infographics',
-    //     link: '/app/widgets/infographics'
-    //   },
-    //   {
-    //     key: 'status_widget',
-    //     icon: 'nature_people',
-    //     name: 'Status',
-    //     link: '/app/widgets/status'
-    //   },
-    //   {
-    //     key: 'analytics_widget',
-    //     icon: 'insert_chart',
-    //     name: 'Analytics',
-    //     link: '/app/widgets/analytics'
-    //   },
-    //   {
-    //     key: 'mini_apps_widget',
-    //     icon: 'web',
-    //     name: 'Mini Apps',
-    //     link: '/app/widgets/mini-apps'
-    //   },
-    //   {
-    //     key: 'gallery_widget',
-    //     icon: 'satellite',
-    //     name: 'Gallery',
-    //     link: '/app/widgets/gallery-carousel'
-    //   },
-    //   {
-    //     key: 'material_font_icon',
-    //     name: 'Fonts & Icons',
-    //     title: true,
-    //   },
-    //   {
-    //     key: 'typography',
-    //     name: 'Typography',
-    //     icon: 'font_download',
-    //     link: '/app/ui/typography'
-    //   },
-    //   {
-    //     key: 'icons',
-    //     name: 'Material Icons',
-    //     icon: 'bookmark',
-    //     link: '/app/ui/icons'
-    //   },
-    //   {
-    //     key: 'layouts',
-    //     name: 'Layouts',
-    //     title: true,
-    //   },
-    //   {
-    //     key: 'grid',
-    //     name: 'Grid',
-    //     icon: 'view_column',
-    //     link: '/app/layouts/grid'
-    //   },
-    //   {
-    //     key: 'application_layout',
-    //     name: 'App Layout',
-    //     icon: 'web',
-    //     link: '/app/layouts/app-layout'
-    //   },
-    //   {
-    //     key: 'responsive',
-    //     name: 'Responsive',
-    //     icon: 'mobile_friendly',
-    //     link: '/app/layouts/responsive'
-    //   }
-    // ]
   },
   {
     key: 'connect-broker',
     name: 'Connect Broker',
-    icon: 'extension',
+    icon: 'link',
     child: [
       {
         key: 'AngelOne',
         name: 'AngelOne',
-        icon: 'view_quilt',
+        icon: 'business_center',
         link: '/app/ui/card-papper'
       },
       {
         key: 'Aliceblue',
         name: 'Aliceblue',
-        icon: 'view_day',
+        icon: 'show_chart',
         link: '/app/ui/accordion'
       },
       {
         key: 'Zerodha',
         name: 'Zerodha',
-        icon: 'subdirectory_arrow_right',
+        icon: 'track_changes',
         link: '/app/ui/tree-view'
       },
       {
         key: 'Shoonya',
         name: 'Shoonya',
-        icon: 'tab',
+        icon: 'insights',
         link: '/app/ui/tabs'
       },
       {
         key: 'Fyers',
         name: 'Fyers',
-        icon: 'vertical_split',
+        icon: 'multiline_chart',
         link: '/app/ui/drawer-menu'
       }
     ]
@@ -245,26 +119,32 @@ module.exports = [
   {
     key: 'login-status',
     name: 'Login Status',
-    icon: 'important_devices',
+    icon: 'lock_open',
     linkParent: '/app/pages/todo',
   },
   {
     key: 'settings',
-    name: 'settings',
-    icon: 'sort',
+    name: 'Settings',
+    icon: 'settings',
     child: [
       {
         key: 'Profile',
         name: 'Profile',
-        icon: 'check_circle',
+        icon: 'person',
         link: '/app/pages/user-profile',
       },
       {
         key: 'Change Password',
         name: 'Change Password',
-        icon: 'perm_contact_calendar',
+        icon: 'lock',
         link: '/app/pages/change-password',
       },
     ]
+  },
+  {
+    key: 'help',
+    name: 'Help',
+    icon: 'help_outline',
+    linkParent: '/app/widgets/help',
   },
 ];

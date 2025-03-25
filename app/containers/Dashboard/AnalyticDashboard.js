@@ -45,7 +45,7 @@ function AnalyticDashboard() {
       <Grid container justifyContent="space-between" alignItems="center">
         <FormControlLabel
           control={<Switch checked={isPaperTrade} onChange={handleToggle} />}
-          label={isPaperTrade ? 'PAPER TRADE' : 'LIVE'}
+          label={isPaperTrade ? 'LIVE' : 'PAPER TRADE'}
         />
       </Grid>
 

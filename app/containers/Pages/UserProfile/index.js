@@ -2,55 +2,36 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import brand from 'enl-api/dummy/brand';
-import AppBar from '@mui/material/AppBar';
 import dummy from 'enl-api/dummy/dummyContents';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import SupervisorAccount from '@mui/icons-material/SupervisorAccount';
-import PhotoLibrary from '@mui/icons-material/PhotoLibrary';
-import {
-  Cover,
-  About,
-  Connection,
-  Albums
-} from 'enl-components';
-import useStyles from 'enl-components/Profile/cover-jss';
+import { Cover } from 'enl-components';
 import { injectIntl } from 'react-intl';
-import messages from 'enl-components/Profile/messages';
 
 import { getUserDetails } from '../../../middlewares/interceptors';
+import Loading from '../../Session/AuthLoading';
 
 function TabContainer(props) {
   const { children } = props;
-  return (
-    <div style={{ paddingTop: 8 * 3 }}>
-      {children}
-    </div>
-  );
+  return <div style={{ paddingTop: 8 * 3 }}>{children}</div>;
 }
 
-TabContainer.propTypes = { children: PropTypes.node.isRequired, };
+TabContainer.propTypes = { children: PropTypes.node.isRequired };
 
-function UserProfile(props) {
-  const { intl } = props;
-  const { classes } = useStyles();
+function UserProfile() {
   const title = brand.name + ' - Profile';
   const description = brand.desc;
-  const [value, setValue] = useState(0);
-
-  const mdDown = useMediaQuery(theme => theme.breakpoints.down('md'));
-  const mdUp = useMediaQuery(theme => theme.breakpoints.up('md'));
 
   const [userData, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchUser = async () => {
+      setLoading(true);
       try {
         const userFetchedData = await getUserDetails();
         setUser(userFetchedData);
       } catch (error) {
         console.error('Failed to fetch user details:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -58,10 +39,6 @@ function UserProfile(props) {
   }, []);
 
   const userDetails = userData?.data;
-
-  const handleChange = (event, val) => {
-    setValue(val);
-  };
 
   return (
     <div>
@@ -73,15 +50,19 @@ function UserProfile(props) {
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
       </Helmet>
-      <Cover
-        coverImg=""
-        avatar={dummy.user.avatar}
-        name={userDetails?.name}
-        desc=""
-        mobile={userDetails?.mobile}
-        email={userDetails?.email}
-      />
-      <AppBar position="static" className={classes.profileTab}>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Cover
+          coverImg=""
+          avatar={dummy.user.avatar}
+          name={userDetails?.name}
+          desc=""
+          mobile={userDetails?.mobile}
+          email={userDetails?.email}
+        />
+      )}
+      {/* <AppBar position="static" className={classes.profileTab}>
         {!mdUp && (
           <Tabs
             value={value}
@@ -113,13 +94,13 @@ function UserProfile(props) {
       </AppBar>
       {value === 0 && <TabContainer><About /></TabContainer>}
       {value === 1 && <TabContainer><Connection /></TabContainer>}
-      {value === 2 && <TabContainer><Albums /></TabContainer>}
+      {value === 2 && <TabContainer><Albums /></TabContainer>} */}
     </div>
   );
 }
 
 UserProfile.propTypes = {
-  intl: PropTypes.object.isRequired
+  intl: PropTypes.object.isRequired,
 };
 
 export default injectIntl(UserProfile);

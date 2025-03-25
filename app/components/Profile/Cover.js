@@ -11,37 +11,49 @@ import Info from '@mui/icons-material/Info';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { injectIntl } from 'react-intl';
 // import messages from './messages';
+import { useNavigate } from 'react-router-dom';
 import useStyles from './cover-jss';
 
-const optionsOpt = [
-  'Edit Profile',
-];
+const optionsOpt = ['Edit Profile'];
 
 const ITEM_HEIGHT = 48;
 
 function Cover(props) {
   const [anchorElOpt, setAnchorElOpt] = useState(null);
 
-  const handleClickOpt = event => {
+  const handleClickOpt = (event) => {
     setAnchorElOpt(event.currentTarget);
   };
 
-  const handleCloseOpt = () => {
-    setAnchorElOpt(null);
-  };
+  const navigate = useNavigate();
 
   const { classes } = useStyles();
   const {
-    avatar,
-    name,
-    email,
-    mobile,
-    desc,
-    coverImg,
+    avatar, name, email, mobile, desc, coverImg
   } = props;
 
+  const handleCloseOpt = (option) => {
+    setAnchorElOpt(null);
+    switch (option) {
+      case 'Edit Profile':
+        navigate('/app/pages/edit-profile', {
+          state: {
+            name,
+            email,
+            phone: mobile,
+          },
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className={classes.cover} style={{ backgroundImage: `url(${coverImg})` }}>
+    <div
+      className={classes.cover}
+      style={{ backgroundImage: `url(${coverImg})` }}
+    >
       <div className={classes.opt}>
         <IconButton className={classes.button} aria-label="Delete" size="large">
           <Info />
@@ -52,7 +64,8 @@ function Cover(props) {
           aria-haspopup="true"
           className={classes.button}
           onClick={handleClickOpt}
-          size="large">
+          size="large"
+        >
           <MoreVertIcon />
         </IconButton>
         <Menu
@@ -67,8 +80,12 @@ function Cover(props) {
             },
           }}
         >
-          {optionsOpt.map(option => (
-            <MenuItem key={option} selected={option === 'Edit Profile'} onClick={handleCloseOpt}>
+          {optionsOpt.map((option) => (
+            <MenuItem
+              key={option}
+              selected={option === 'Edit Profile'}
+              onClick={() => handleCloseOpt(option)}
+            >
               {option}
             </MenuItem>
           ))}

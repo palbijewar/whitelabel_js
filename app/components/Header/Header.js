@@ -33,7 +33,6 @@ function Header(props) {
     mode,
     signOut,
     dense,
-    isLogin,
     avatar,
     intl
   } = props;
@@ -42,12 +41,13 @@ function Header(props) {
   const [showTitle, setShowTitle] = useState(false);
   const [userId, setUserId] = useState(null);
 
+  const isAuthenticated = localStorage.getItem('access_token');
   // Initial header style
   let flagDarker = false;
   let flagTitle = false;
 
   useEffect(() => {
-    if (isLogin) {
+    if (isAuthenticated) {
       getUserDetails()
         .then((response) => {
           console.log('User API Response:', response);
@@ -57,7 +57,7 @@ function Header(props) {
           console.error('Failed to fetch user details:', error);
         });
     }
-  }, [isLogin]);
+  }, [isAuthenticated]);
 
   const handleScroll = () => {
     const doc = document.documentElement;
@@ -136,7 +136,7 @@ function Header(props) {
           <span className={classes.separatorV} />
         )}
         <div className={classes.userToolbar}>
-          {isLogin ? (
+          {isAuthenticated ? (
             <>
               <Typography variant="body1" style={{ marginRight: 10, color: mode === 'light' ? '#000' : '#fff' }}>
                 User ID: {userId || 'Loading...'}

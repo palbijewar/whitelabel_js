@@ -85,3 +85,21 @@ export const getUserDetails = async () => {
     throw error;
   }
 };
+
+export const updateProfile = async (userId, formData) => {
+  const reqBody = {
+    name: formData?.name,
+    email: formData?.email,
+    mobile: formData?.phone,
+    tag: 'regular',
+    password: formData?.password,
+  };
+
+  try {
+    const response = await interceptorInstance.patch(`/users/${userId}`, reqBody);
+    return response?.data;
+  } catch (error) {
+    console.error('Update profile error:', error.response?.data || error.message);
+    throw error;
+  }
+};

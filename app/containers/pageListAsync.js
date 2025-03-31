@@ -10,6 +10,14 @@ export const HomePage = loadable(() => import('./LandingPage/HomePage'), {
 export const AnalyticDashboard = loadable(() => import('./Dashboard/AnalyticDashboard'), {
   fallback: <Loading />,
 });
+// Client Dashboard
+export const ClientDashboard = loadable(() => import('./Dashboard/ClientDashboard'), {
+  fallback: <Loading />,
+});
+// Admin Dashboard
+export const AdminDashboard = loadable(() => import('./Dashboard/AdminDashboard'), {
+  fallback: <Loading />,
+});
 export const MarketingDashboard = loadable(() => import('./Dashboard/MarketingDashboard'), {
   fallback: <Loading />,
 });

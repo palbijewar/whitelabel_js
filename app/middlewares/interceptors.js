@@ -44,10 +44,13 @@ export const loginService = async (credentials) => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     });
 
-    console.log('Login response:', response.data);
-
     if (response.data?.data?.access_token) {
       localStorage.setItem('access_token', response.data.data.access_token);
+      // eslint-disable-next-line no-use-before-define
+      const userDetails = await getUserDetails();
+      if (userDetails?.data?.user_type) {
+        localStorage.setItem('user_type', userDetails.data.user_type);
+      }
     }
 
     return response.data;

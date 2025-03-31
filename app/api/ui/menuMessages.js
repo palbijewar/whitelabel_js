@@ -44,6 +44,14 @@ export default defineMessages({
     id: `${scope}.home.personal`,
     defaultMessage: 'Analytic',
   },
+  client: {
+    id: `${scope}.home.client`,
+    defaultMessage: 'Client',
+  },
+  admin: {
+    id: `${scope}.home.admin`,
+    defaultMessage: 'Admin',
+  },
   crm: {
     id: `${scope}.home.crm`,
     defaultMessage: 'Marketing',

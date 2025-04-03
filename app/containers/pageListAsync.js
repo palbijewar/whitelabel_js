@@ -24,6 +24,9 @@ export const MarketingDashboard = loadable(() => import('./Dashboard/MarketingDa
 export const CryptoDashboard = loadable(() => import('./Dashboard/CryptoDashboard'), {
   fallback: <Loading />,
 });
+export const UsersTable = loadable(() => import('./Tables/UsersTable'), {
+  fallback: <Loading />,
+});
 
 // Layouts
 export const Infographics = loadable(() => import('./Widgets/Infographics'), {

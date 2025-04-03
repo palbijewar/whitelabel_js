@@ -8,6 +8,8 @@ import { injectIntl } from 'react-intl';
 
 import { getUserDetails } from '../../../middlewares/interceptors';
 import Loading from '../../Session/AuthLoading';
+import UsersTable from '../../Tables/UsersTable';
+import HostsTable from '../../Tables/HostsTable';
 
 function TabContainer(props) {
   const { children } = props;
@@ -95,6 +97,8 @@ function UserProfile() {
       {value === 0 && <TabContainer><About /></TabContainer>}
       {value === 1 && <TabContainer><Connection /></TabContainer>}
       {value === 2 && <TabContainer><Albums /></TabContainer>} */}
+      <HostsTable />
+      <UsersTable />
     </div>
   );
 }

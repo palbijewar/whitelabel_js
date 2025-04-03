@@ -36,7 +36,8 @@ import {
   TrafficIndicator, StreetViewMap,
   NotFound,
   UpdateUser,
-  NotificationDashboard
+  NotificationDashboard,
+  UsersTable
 } from '../pageListAsync';
 import TradeOrdersTable from '../Tables/TradeOrders';
 import TradeSignalsTable from '../Tables/TradeSignals';
@@ -56,6 +57,8 @@ function Application(props) {
         <Route path="dashboard" element={<AnalyticDashboard />} />
         <Route path="dashboard/marketing" element={<MarketingDashboard />} />
         <Route path="dashboard/crypto" element={<CryptoDashboard />} />
+        {/* Admin */}
+        <Route path="admin/users" element={<UsersTable />} />
         { /* Widgets */ }
         <Route path="widgets" element={<Parent />} />
         <Route path="widgets/infographics" element={<Infographics />} />

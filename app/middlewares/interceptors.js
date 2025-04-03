@@ -106,3 +106,27 @@ export const updateProfile = async (userId, formData) => {
     throw error;
   }
 };
+
+export const getUsers = async (skip = 0, limit = 10) => {
+  try {
+    const response = await interceptorInstance.get(`/users/`, {
+      params: { skip, limit },
+    });
+    return response?.data;
+  } catch (error) {
+    console.error('Error fetching users:', error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const getHosts = async (skip = 0, limit = 10) => {
+  try {
+    const response = await interceptorInstance.get(`/hosts/`, {
+      params: { skip, limit },
+    });
+    return response?.data;
+  } catch (error) {
+    console.error('Error fetching users:', error.response?.data || error.message);
+    throw error;
+  }
+};

@@ -80,6 +80,7 @@ function LoginForm(props) {
           loginUser(user.data)
         );
         navigate('/app/dashboard');
+        window.location.reload()
       } catch (error) {
         console.error('Login error:', error);
         setServerMessage({

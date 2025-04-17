@@ -97,8 +97,8 @@ function UserProfile() {
       {value === 0 && <TabContainer><About /></TabContainer>}
       {value === 1 && <TabContainer><Connection /></TabContainer>}
       {value === 2 && <TabContainer><Albums /></TabContainer>} */}
-      <HostsTable />
-      <UsersTable />
+      {/* <HostsTable />
+      <UsersTable /> */}
     </div>
   );
 }

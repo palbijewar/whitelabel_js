@@ -34,32 +34,8 @@ const defaultMenu = [
     key: "Marketplace",
     name: "Marketplace",
     icon: "storefront",
-    child: [
-      {
-        key: "PrimeAlgoStocks",
-        name: "Prime Algo Stocks",
-        link: "/app/widgets/mini-apps",
-        icon: "trending_up",
-      },
-      {
-        key: "PrimeAlgoFO",
-        name: "Prime Algo F&O",
-        link: "/app/widgets/mini-apps",
-        icon: "assessment",
-      },
-      {
-        key: "PrimeAlgoMcx",
-        name: "Prime Algo MCX",
-        link: "/app/widgets/mini-apps",
-        icon: "leaderboard",
-      },
-      {
-        key: "PrimeAlgoCurrency",
-        name: "Prime Algo Currency",
-        link: "/app/widgets/mini-apps",
-        icon: "attach_money",
-      },
-    ],
+    linkParent: "/app/widgets/marketplace",
+
   },
   {
     key: "broker-response",

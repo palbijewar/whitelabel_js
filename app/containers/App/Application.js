@@ -37,7 +37,8 @@ import {
   NotFound,
   UpdateUser,
   NotificationDashboard,
-  UsersTable
+  UsersTable,
+  Marketplace
 } from '../pageListAsync';
 import TradeOrdersTable from '../Tables/TradeOrders';
 import TradeSignalsTable from '../Tables/TradeSignals';
@@ -68,6 +69,7 @@ function Application(props) {
         <Route path="widgets/status" element={<Status />} />
         <Route path="widgets/broker-response" element={<BrokerResponse />} />
         <Route path="widgets/help" element={<Help />} />
+        <Route path="widgets/marketplace" element={<Marketplace />} />
         { /* Layout */ }
         <Route path="layouts" element={<Parent />} />
         <Route path="layouts/grid" element={<Grid />} />

@@ -44,6 +44,9 @@ export const Gallery = loadable(() => import('./Widgets/Gallery'), {
 export const Status = loadable(() => import('./Widgets/Status'), {
   fallback: <Loading />,
 });
+export const Marketplace = loadable(() => import('./Widgets/Marketplace'), {
+  fallback: <Loading />,
+});
 
 // Layouts
 export const AppLayout = loadable(() => import('./Layouts/AppLayout'), {
